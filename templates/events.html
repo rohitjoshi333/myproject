@@ -1,0 +1,504 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Meetings - Hotel New Chetan</title>
+    <meta name="description" content="Host your special events and meetings at Hotel New Chetan. Three elegant halls with modern facilities for weddings, conferences, and celebrations.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/events.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link active">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Events & Meetings</h1>
+            <p>Create unforgettable memories in our elegant event spaces</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Events</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Events Hero -->
+    <section class="events-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Perfect Venues for Every Occasion</h2>
+                    <p>Whether you're planning a wedding, corporate meeting, birthday celebration, or any special event, our three beautifully designed halls provide the perfect setting with modern amenities and exceptional service.</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Event Halls</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Events Hosted</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Support</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="cta-button" onclick="HotelApp.openWhatsAppChat('Hi! I would like to inquire about booking an event hall at Hotel New Chetan. Please share availability and pricing details.')">Inquire Now</button>
+                        <a href="#halls" class="cta-button secondary">View Halls</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg" alt="Event Hall">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Halls -->
+    <section class="event-halls" id="halls">
+        <div class="container">
+            <h2 class="section-title">Our Event Halls</h2>
+            <p class="section-subtitle">Choose from our three distinctive venues, each designed for different occasions</p>
+            
+            <div class="halls-grid">
+                <!-- Grand Ballroom -->
+                <div class="hall-card">
+                    <div class="hall-image">
+                        <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg" alt="Grand Ballroom">
+                        <div class="hall-badge">Most Popular</div>
+                        <button class="gallery-btn" onclick="openHallGallery('grand-ballroom')">
+                            <span>📷</span> View Gallery
+                        </button>
+                    </div>
+                    <div class="hall-info">
+                        <h3>Grand Ballroom</h3>
+                        <p>Our largest and most elegant venue, perfect for weddings, large celebrations, and corporate events. Features crystal chandeliers, premium sound system, and spacious dance floor.</p>
+                        
+                        <div class="hall-features">
+                            <div class="feature-row">
+                                <span class="feature-icon">👥</span>
+                                <span>Capacity: 200-300 guests</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📐</span>
+                                <span>Area: 3,000 sq ft</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🎵</span>
+                                <span>Premium Sound System</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">💡</span>
+                                <span>LED Lighting</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">❄️</span>
+                                <span>Central AC</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🍽️</span>
+                                <span>Catering Kitchen</span>
+                            </div>
+                        </div>
+
+                        <div class="pricing-info">
+                            <h4>Pricing</h4>
+                            <div class="price-list">
+                                <div class="price-item">
+                                    <span>Half Day (4 hours)</span>
+                                    <span class="price">₹25,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Full Day (8 hours)</span>
+                                    <span class="price">₹45,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Wedding Package</span>
+                                    <span class="price">₹75,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hall-actions">
+                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Grand Ballroom')">Book This Hall</button>
+                            <button class="details-btn" onclick="showHallDetails('grand-ballroom')">More Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conference Hall -->
+                <div class="hall-card">
+                    <div class="hall-image">
+                        <img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg" alt="Conference Hall">
+                        <div class="hall-badge">Business Events</div>
+                        <button class="gallery-btn" onclick="openHallGallery('conference-hall')">
+                            <span>📷</span> View Gallery
+                        </button>
+                    </div>
+                    <div class="hall-info">
+                        <h3>Conference Hall</h3>
+                        <p>Modern conference facility equipped with latest technology for corporate meetings, seminars, and business presentations. Professional ambiance with comfortable seating.</p>
+                        
+                        <div class="hall-features">
+                            <div class="feature-row">
+                                <span class="feature-icon">👥</span>
+                                <span>Capacity: 50-100 guests</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📐</span>
+                                <span>Area: 1,500 sq ft</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📽️</span>
+                                <span>Projector & Screen</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📶</span>
+                                <span>High-Speed WiFi</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🎤</span>
+                                <span>Microphone System</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">☕</span>
+                                <span>Tea/Coffee Service</span>
+                            </div>
+                        </div>
+
+                        <div class="pricing-info">
+                            <h4>Pricing</h4>
+                            <div class="price-list">
+                                <div class="price-item">
+                                    <span>Half Day (4 hours)</span>
+                                    <span class="price">₹12,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Full Day (8 hours)</span>
+                                    <span class="price">₹20,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Monthly Package</span>
+                                    <span class="price">₹3,50,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hall-actions">
+                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Conference Hall')">Book This Hall</button>
+                            <button class="details-btn" onclick="showHallDetails('conference-hall')">More Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Celebration Hall -->
+                <div class="hall-card">
+                    <div class="hall-image">
+                        <img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg" alt="Celebration Hall">
+                        <div class="hall-badge">Intimate Events</div>
+                        <button class="gallery-btn" onclick="openHallGallery('celebration-hall')">
+                            <span>📷</span> View Gallery
+                        </button>
+                    </div>
+                    <div class="hall-info">
+                        <h3>Celebration Hall</h3>
+                        <p>Cozy and intimate venue perfect for birthday parties, anniversaries, small family gatherings, and private celebrations. Warm ambiance with flexible seating arrangements.</p>
+                        
+                        <div class="hall-features">
+                            <div class="feature-row">
+                                <span class="feature-icon">👥</span>
+                                <span>Capacity: 30-80 guests</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📐</span>
+                                <span>Area: 1,000 sq ft</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🎵</span>
+                                <span>Music System</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🎈</span>
+                                <span>Decoration Support</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">🍰</span>
+                                <span>Cake Cutting Area</span>
+                            </div>
+                            <div class="feature-row">
+                                <span class="feature-icon">📸</span>
+                                <span>Photo Booth Space</span>
+                            </div>
+                        </div>
+
+                        <div class="pricing-info">
+                            <h4>Pricing</h4>
+                            <div class="price-list">
+                                <div class="price-item">
+                                    <span>Half Day (4 hours)</span>
+                                    <span class="price">₹8,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Full Day (8 hours)</span>
+                                    <span class="price">₹15,000</span>
+                                </div>
+                                <div class="price-item">
+                                    <span>Birthday Package</span>
+                                    <span class="price">₹12,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hall-actions">
+                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Celebration Hall')">Book This Hall</button>
+                            <button class="details-btn" onclick="showHallDetails('celebration-hall')">More Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Services -->
+    <section class="event-services">
+        <div class="container">
+            <h2 class="section-title">Complete Event Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🍽️</div>
+                    <h3>Catering Services</h3>
+                    <p>Delicious multi-cuisine catering with customizable menus for all dietary preferences</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Decoration & Setup</h3>
+                    <p>Professional decoration services with themes, flowers, lighting, and stage setup</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📸</div>
+                    <h3>Photography</h3>
+                    <p>Professional photographers and videographers to capture your special moments</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎵</div>
+                    <h3>Entertainment</h3>
+                    <p>DJ services, live music, sound systems, and entertainment arrangements</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>Transportation</h3>
+                    <p>Guest transportation and parking arrangements for your convenience</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏨</div>
+                    <h3>Accommodation</h3>
+                    <p>Special rates for guests staying at our hotel during your event</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Packages -->
+    <section class="event-packages">
+        <div class="container">
+            <h2 class="section-title">Event Packages</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Wedding Package</h3>
+                        <div class="package-price">₹1,50,000</div>
+                        <span class="package-duration">Full Day Event</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>Grand Ballroom (12 hours)</li>
+                            <li>Catering for 200 guests</li>
+                            <li>Decoration & Stage Setup</li>
+                            <li>Photography & Videography</li>
+                            <li>DJ & Sound System</li>
+                            <li>Bridal Room</li>
+                            <li>Guest Accommodation Discount</li>
+                        </ul>
+                    </div>
+                    <button class="package-btn" onclick="HotelApp.openWhatsAppChat('Hi! I am interested in the Wedding Package at Hotel New Chetan. Please provide more details and availability.')">Choose Package</button>
+                </div>
+
+                <div class="package-card featured">
+                    <div class="package-badge">Most Popular</div>
+                    <div class="package-header">
+                        <h3>Corporate Package</h3>
+                        <div class="package-price">₹35,000</div>
+                        <span class="package-duration">Full Day Meeting</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>Conference Hall (8 hours)</li>
+                            <li>Projector & AV Equipment</li>
+                            <li>High-Speed WiFi</li>
+                            <li>Tea/Coffee & Lunch</li>
+                            <li>Stationery & Materials</li>
+                            <li>Parking for 50 vehicles</li>
+                            <li>Technical Support</li>
+                        </ul>
+                    </div>
+                    <button class="package-btn" onclick="HotelApp.openWhatsAppChat('Hi! I am interested in the Corporate Package at Hotel New Chetan. Please provide more details and availability.')">Choose Package</button>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Birthday Package</h3>
+                        <div class="package-price">₹25,000</div>
+                        <span class="package-duration">4 Hours Celebration</span>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li>Celebration Hall (4 hours)</li>
+                            <li>Birthday Decoration</li>
+                            <li>Cake & Refreshments</li>
+                            <li>Music System</li>
+                            <li>Photo Booth Setup</li>
+                            <li>Party Games Arrangement</li>
+                            <li>Return Gifts</li>
+                        </ul>
+                    </div>
+                    <button class="package-btn" onclick="HotelApp.openWhatsAppChat('Hi! I am interested in the Birthday Package at Hotel New Chetan. Please provide more details and availability.')">Choose Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Process -->
+    <section class="booking-process">
+        <div class="container">
+            <h2 class="section-title">How to Book Your Event</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Contact Us</h3>
+                    <p>Reach out via WhatsApp or phone to discuss your event requirements</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Site Visit</h3>
+                    <p>Schedule a visit to see our halls and discuss arrangements</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Customize</h3>
+                    <p>Work with our team to customize your event package</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Confirm</h3>
+                    <p>Finalize details and confirm your booking with advance payment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="policies.html">Privacy Policy</a>
+                    <a href="policies.html">Terms of Service</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+        <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/events.js"></script>
+</body>
+</html>

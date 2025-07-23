@@ -1,0 +1,287 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel New Chetan - Premium Accommodation Since 2019</title>
+    <meta name="description" content="Experience luxury at Hotel New Chetan. Premium rooms, fine dining, and exceptional service since 2019. Book your stay today!">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link active">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn login-btn">Login / Signup</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Enhanced Slider -->
+    <section class="hero">
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide active" style="background-image: url('{% static 'imgs/index.jpg'%}');">
+                <div class="slide-content">
+                    <h1>Luxury Awaits You</h1>
+                    <p>Experience premium comfort and exceptional service at Hotel New Chetan</p>
+                    <a href="rooms.html" class="cta-button">Explore Rooms</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('{% static 'imgs/Bar.jpg'%}');">
+                <div class="slide-content">
+                    <h1>Fine Dining Experience</h1>
+                    <p>Savor exquisite cuisine crafted by our talented chefs</p>
+                    <a href="restaurant.html" class="cta-button">View Restaurant</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('{% static 'imgs/big_banquet.jpg'%}');">
+                <div class="slide-content">
+                    <h1>Explore Local Attractions</h1>
+                    <p>Discover beautiful destinations near our hotel</p>
+                    <a href="gallery.html#nearby" class="cta-button">Nearby Visits</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+        <div class="slider-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </section>
+
+    <!-- Quick Booking Form -->
+    <section class="quick-booking">
+        <div class="container">
+            <form class="booking-form" id="quickBookingForm">
+                <div class="form-group">
+                    <label for="checkin">Check-in</label>
+                    <input type="date" id="checkin" name="checkin" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Check-out</label>
+                    <input type="date" id="checkout" name="checkout" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomType">Room Type</label>
+                    <select id="roomType" name="roomType" required>
+                        <option value="">Select Room</option>
+                        <option value="deluxe">Deluxe Room</option>
+                        <option value="suite">Executive Suite</option>
+                        <option value="family">Family Room</option>
+                        <option value="presidential">Presidential Suite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests" name="guests" required>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5+">5+ Guests</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Check Availability</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Featured Rooms -->
+    <section class="featured-rooms">
+        <div class="container">
+            <h2 class="section-title">Featured Rooms</h2>
+            <p class="section-subtitle">Experience comfort and luxury in our carefully designed rooms</p>
+            <div class="rooms-grid">
+
+                {%for feature in features %}
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="{% static 'imgs/deluxe-single.jpg'%}" alt="Deluxe Room">
+                    </div>
+                    <div class="room-info">
+                        <h3>{{feature.name}}</h3>
+                        <p>{{feature.description}}</p>
+                        <div class="room-price">{{feature.price}}<span>/night</span></div>
+                        <div class="room-features">
+                            <span>2 Guests</span>
+                            <span>WiFi</span>
+                            <span>AC</span>
+                        </div>
+                        <button class="room-btn">Book Now</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="section-cta">
+                <a href="rooms.html" class="cta-button">View All Rooms</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Preview -->
+    <section class="restaurant-preview">
+        <div class="container">
+            <div class="preview-content">
+                <div class="preview-text">
+                    <h2>Fine Dining Experience</h2>
+                    <p>Indulge in culinary excellence at our restaurant. Our skilled chefs prepare authentic and international cuisine using the finest ingredients.</p>
+                    <ul class="feature-list">
+                        <li>Authentic Indian Cuisine</li>
+                        <li>International Dishes</li>
+                        <li>Fresh Local Ingredients</li>
+                        <li>Vegetarian & Non-Vegetarian Options</li>
+                    </ul>
+                    <div class="preview-actions">
+                        <a href="restaurant.html" class="cta-button">Explore Restaurant</a>
+                        <a href="menu.html" class="cta-button secondary">View Menu</a>
+                    </div>
+                </div>
+                <div class="preview-image">
+                    <img src="{% static 'imgs/Bar,Restro,Overall hotel img/Family-Resturant.jpg'%}" alt="Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Preview -->
+    <section class="gallery-preview">
+        <div class="container">
+            <h2 class="section-title">Gallery Highlights</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="{% static 'imgs/banquet.jpg'%}" alt="Hotel Interior">
+                    <div class="gallery-overlay">
+                        <h3>Hotel Interior</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'imgs/Bar.jpg'%}" alt="Local Attractions">
+                    <div class="gallery-overlay">
+                        <h3>Nearby Attractions</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'imgs/big_banquet.jpg'%}" alt="Event Halls">
+                    <div class="gallery-overlay">
+                        <h3>Event Spaces</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'imgs/suite202.jpg'%}" alt="Dining Area">
+                    <div class="gallery-overlay">
+                        <h3>Dining Experience</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="gallery.html" class="cta-button">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="HC-logo.png" alt="Hotel New Chetan Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>Hotel New Chetan</h3>
+                        </div>
+                    </div>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+<!-- WhatsApp Floating Button -->
+<div class="whatsapp-float">
+  <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-link"
+      aria-label="Chat with us on WhatsApp">
+        <span class="icon" aria-hidden="true">
+            <i class="fa-brands fa-whatsapp"></i>
+        </span>
+        <span class="label">We're here to help</span>
+  </a>
+</div>
+
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/home.js'%}"></script>
+</body>
+</html>

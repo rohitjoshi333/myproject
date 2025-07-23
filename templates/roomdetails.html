@@ -1,0 +1,333 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details - Hotel New Chetan</title>
+    <meta name="description" content="Detailed information about our luxury rooms at Hotel New Chetan. View amenities, pricing, and book your perfect accommodation.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/room-details.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link active">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Room Details Content -->
+     
+    <main class="room-details-main">
+        <div class="container">
+            <!-- Back Button -->
+            <div class="back-navigation">
+                <a href="rooms.html" class="back-btn">← Back to Rooms</a>
+                <nav class="breadcrumb">
+                    <a href="index.html">Home</a> / <a href="rooms.html">Rooms</a> / <span id="roomNameBreadcrumb">Room Details</span>
+                </nav>
+            </div>
+
+            <!-- Room Gallery -->
+            <section class="room-gallery">
+                <div class="main-image">
+                    <img id="mainRoomImage" src="" alt="Room Image">
+                    <div class="image-counter">
+                        <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
+                    </div>
+                    <button class="gallery-nav-btn gallery-prev" id="prevImage">‹</button>
+                    <button class="gallery-nav-btn gallery-next" id="nextImage">›</button>
+                </div>
+                <div class="thumbnail-gallery">
+                    <div class="thumbnails-container" id="thumbnailsContainer">
+                        <!-- Thumbnails will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Room Information -->
+            <section class="room-info-section">
+                <div class="room-info-grid">
+                    <div class="room-details-content">
+                        <div class="room-header">
+                            <div class="room-category-badge" id="roomCategory">{{room.category}}</div>
+                            <h1 id="roomName">{{room.name}}</h1>
+                            <div class="room-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">(4.8/5 based on 124 reviews)</span>
+                            </div>
+                        </div>
+
+                        <div class="room-description">
+                            <h3>Description</h3>
+                            <p id="roomDescription">{{room.description}}</p>
+                        </div>
+
+                        <div class="amenities-grid" id="amenitiesGrid">
+                            {% for amenity in room.amenities %}
+                                <span>{{ amenity }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="room-policies">
+                            <h3>Policies</h3>
+                            <div class="policies-grid">
+                                <div class="policy-item">
+                                    <span class="policy-icon">🕐</span>
+                                    <div>
+                                        <strong>Check-in:</strong> 2:00 PM<br>
+                                        <strong>Check-out:</strong> 12:00 PM
+                                    </div>
+                                </div>
+                                <div class="policy-item">
+                                    <span class="policy-icon">🚭</span>
+                                    <div>
+                                        <strong>No Smoking</strong><br>
+                                        Smoking is not allowed in rooms
+                                    </div>
+                                </div>
+                                <div class="policy-item">
+                                    <span class="policy-icon">🐕</span>
+                                    <div>
+                                        <strong>Pet Policy</strong><br>
+                                        Pets allowed with prior approval
+                                    </div>
+                                </div>
+                                <div class="policy-item">
+                                    <span class="policy-icon">❌</span>
+                                    <div>
+                                        <strong>Cancellation</strong><br>
+                                        Free cancellation up to 24 hours
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-sidebar">
+                        <div class="booking-card">
+                            <div class="price-section">
+                                <div class="price-display">
+                                    <span class="price" id="roomPrice">{{room.price}}</span>
+                                    <span class="price-unit">/night</span>
+                                </div>
+                                <div class="availability-status" id="availabilityStatus">
+                                    <span class="status-indicator available"></span>
+                                    <span>Available</span>
+                                </div>
+                            </div>
+
+                            <div class="booking-form">
+                                <div class="date-inputs">
+                                    <div class="input-group">
+                                        <label for="checkinDate">Check-in</label>
+                                        <input type="date" id="checkinDate" name="checkinDate" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="checkoutDate">Check-out</label>
+                                        <input type="date" id="checkoutDate" name="checkoutDate" required>
+                                    </div>
+                                </div>
+
+                                <div class="guest-selection">
+                                    <label for="guestCount">Guests</label>
+                                    <select id="guestCount" name="guestCount" required>
+                                        <option value="1">1 Guest</option>
+                                        <option value="2">2 Guests</option>
+                                        <option value="3">3 Guests</option>
+                                        <option value="4">4 Guests</option>
+                                        <option value="5">5 Guests</option>
+                                        <option value="6">6 Guests</option>
+                                    </select>
+                                </div>
+
+                                <div class="price-breakdown" id="priceBreakdown" style="display: none;">
+                                    <div class="breakdown-item">
+                                        <span>Room rate × <span id="nightCount">0</span> nights</span>
+                                        <span id="subtotal">₹0</span>
+                                    </div>
+                                    <div class="breakdown-item">
+                                        <span>Taxes & fees</span>
+                                        <span id="taxes">₹0</span>
+                                    </div>
+                                    <div class="breakdown-total">
+                                        <span>Total</span>
+                                        <span id="totalPrice">₹0</span>
+                                    </div>
+                                </div>
+
+                                <button class="book-now-btn" id="bookNowBtn">
+                                    <span>Book Now</span>
+                                </button>
+
+                                <button class="whatsapp-inquiry-btn" id="whatsappInquiry">
+                                    <span>💬</span>
+                                    <span>Inquire via WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="contact-info">
+                            <h4>Need Help?</h4>
+                            <p>Our team is available 24/7 to assist you</p>
+                            <div class="contact-methods">
+                                <a href="tel:+919876543210" class="contact-method">
+                                    <span>📞</span>
+                                    <span>+91 98765 43210</span>
+                                </a>
+                                <a href="mailto:info@hotelnewchetan.com" class="contact-method">
+                                    <span>✉️</span>
+                                    <span>info@hotelnewchetan.com</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Similar Rooms -->
+            <section class="similar-rooms">
+                <h2>Similar Rooms</h2>
+                <div class="similar-rooms-grid" id="similarRoomsGrid">
+                    <!-- Similar rooms will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close" id="modalClose">&times;</button>
+                <h3>Complete Your Booking</h3>
+                <form class="booking-details-form" id="bookingDetailsForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guestName">Full Name *</label>
+                            <input type="text" id="guestName" name="guestName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestEmail">Email *</label>
+                            <input type="email" id="guestEmail" name="guestEmail" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guestPhone">Phone Number *</label>
+                            <input type="tel" id="guestPhone" name="guestPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestAddress">Address</label>
+                            <input type="text" id="guestAddress" name="guestAddress">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests</label>
+                        <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any special requirements or requests..."></textarea>
+                    </div>
+                    <div class="booking-summary">
+                        <h4>Booking Summary</h4>
+                        <div class="summary-details">
+                            <p><strong>Room:</strong> <span id="summaryRoomName"></span></p>
+                            <p><strong>Check-in:</strong> <span id="summaryCheckin"></span></p>
+                            <p><strong>Check-out:</strong> <span id="summaryCheckout"></span></p>
+                            <p><strong>Guests:</strong> <span id="summaryGuests"></span></p>
+                            <p><strong>Total Amount:</strong> <span id="summaryTotal"></span></p>
+                        </div>
+                    </div>
+                    <button type="submit" class="confirm-booking-btn">Confirm Booking via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="policies.html">Privacy Policy</a>
+                    <a href="policies.html">Terms of Service</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>
+
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/room-details.js'%}"></script>
+</body>
+</html>

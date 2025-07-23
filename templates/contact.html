@@ -1,0 +1,363 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Hotel New Chetan</title>
+    <meta name="description" content="Get in touch with Hotel New Chetan. Find our location, contact details, and send us a message. We're here to help with your accommodation needs.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/contact.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link active">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Contact Us</h1>
+            <p>We're here to help and answer any questions you might have</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Contact</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Visit Us</h3>
+                    <p>123 Hotel Street<br>City Center, State 12345<br>India</p>
+                    <button class="contact-btn" onclick="openGoogleMaps()">Get Directions</button>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>Reception: +91 98765 43210<br>Restaurant: +91 98765 43211<br>Events: +91 98765 43212</p>
+                    <button class="contact-btn" onclick="callHotel()">Call Now</button>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email Us</h3>
+                    <p>info@hotelnewchetan.com<br>reservations@hotelnewchetan.com<br>events@hotelnewchetan.com</p>
+                    <button class="contact-btn" onclick="emailHotel()">Send Email</button>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Quick responses for<br>bookings and inquiries<br>Available 24/7</p>
+                    <button class="contact-btn" onclick="HotelApp.openWhatsAppChat('Hello! I have a question about Hotel New Chetan services.')">Chat Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Map -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="form-container">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible</p>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="room-booking">Room Booking Inquiry</option>
+                                <option value="restaurant">Restaurant Reservation</option>
+                                <option value="events">Event Booking</option>
+                                <option value="complaint">Complaint or Feedback</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Please provide details about your inquiry..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for special offers and updates
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Send Message</span>
+                            <div class="loading-spinner" style="display: none;"></div>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="map-container">
+                    <h2>Find Us</h2>
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968459391!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1635959542132!5m2!1sen!2sus"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-info">
+                        <h3>Location Details</h3>
+                        <ul>
+                            <li>🚗 Free parking available</li>
+                            <li>🚇 5 minutes from metro station</li>
+                            <li>✈️ 30 minutes from airport</li>
+                            <li>🏪 Walking distance to shopping centers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Operating Hours -->
+    <section class="operating-hours">
+        <div class="container">
+            <h2 class="section-title">Operating Hours</h2>
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h3>Reception</h3>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span>Monday - Sunday</span>
+                            <span>24 Hours</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hours-card">
+                    <h3>Restaurant</h3>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span>Breakfast</span>
+                            <span>7:00 AM - 10:30 AM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span>Lunch</span>
+                            <span>12:00 PM - 3:30 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span>Dinner</span>
+                            <span>7:00 PM - 11:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hours-card">
+                    <h3>Room Service</h3>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span>Monday - Sunday</span>
+                            <span>24 Hours</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hours-card">
+                    <h3>Events Team</h3>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <span>Monday - Friday</span>
+                            <span>9:00 AM - 6:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span>Saturday - Sunday</span>
+                            <span>10:00 AM - 4:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What are your check-in and check-out times?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Check-in time is 2:00 PM and check-out time is 12:00 PM. Early check-in and late check-out may be available upon request and subject to availability.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you offer airport transportation?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we provide airport pickup and drop-off services. Please contact us at least 24 hours in advance to arrange transportation. Additional charges may apply.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is parking available at the hotel?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer complimentary parking for all our guests. We have both covered and open parking spaces available on a first-come, first-served basis.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is your cancellation policy?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Cancellations can be made up to 24 hours before check-in without any charges. Cancellations made within 24 hours may incur a one-night charge.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you allow pets?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We welcome pets with prior approval. Please inform us during booking about your pet. Additional cleaning charges may apply.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What amenities are included in the room?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All rooms include free WiFi, air conditioning, flat-screen TV, mini-bar, safe, and premium bathroom amenities. Room service is available 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>  
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>

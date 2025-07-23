@@ -1,0 +1,408 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Hotel New Chetan Restaurant</title>
+    <meta name="description" content="Explore our complete menu featuring authentic Indian cuisine, international dishes, and beverages at Hotel New Chetan restaurant.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/menu.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link active">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Our Menu</h1>
+            <p>Discover our delicious selection of authentic Indian and international cuisine</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <a href="restaurant.html">Restaurant</a> / <span>Menu</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Menu Filters -->
+    <section class="menu-filters">
+        <div class="container">
+            <div class="filter-controls">
+                <button class="menu-filter-btn active" data-category="all">All Items</button>
+                <button class="menu-filter-btn" data-category="breakfast">Breakfast</button>
+                <button class="menu-filter-btn" data-category="appetizers">Appetizers</button>
+                <button class="menu-filter-btn" data-category="main-course">Main Course</button>
+                <button class="menu-filter-btn" data-category="rice">Rice & Biryani</button>
+                <button class="menu-filter-btn" data-category="vegetarian">Vegetarian</button>
+                <button class="menu-filter-btn" data-category="desserts">Desserts</button>
+                <button class="menu-filter-btn" data-category="beverages">Beverages</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Items -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="menu-grid" id="menuGrid">
+                <!-- Breakfast Items -->
+                <div class="menu-item" data-category="breakfast">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg" alt="Masala Dosa">
+                        <div class="menu-item-badge">Popular</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Masala Dosa</h3>
+                        <p>Crispy rice crepe filled with spiced potato curry, served with coconut chutney and sambar</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹180</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Masala Dosa', '180')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="breakfast">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg" alt="Poha">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Poha</h3>
+                        <p>Flattened rice cooked with onions, mustard seeds, curry leaves, and peanuts</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹120</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Poha', '120')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Appetizers -->
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg" alt="Samosa">
+                        <div class="menu-item-badge">Chef's Special</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Samosa (2 pieces)</h3>
+                        <p>Crispy pastry filled with spiced potatoes and peas, served with mint chutney</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹80</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Samosa (2 pieces)', '80')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg" alt="Chicken Tikka">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Chicken Tikka</h3>
+                        <p>Marinated chicken pieces grilled in tandoor with aromatic spices</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹320</span>
+                            <span class="dietary-info">🍖 Non-Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Chicken Tikka', '320')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Main Course -->
+                <div class="menu-item" data-category="main-course">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg" alt="Butter Chicken">
+                        <div class="menu-item-badge">Bestseller</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Butter Chicken</h3>
+                        <p>Tender chicken in rich, creamy tomato-based sauce with aromatic spices</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹450</span>
+                            <span class="dietary-info">🍖 Non-Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Butter Chicken', '450')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="main-course">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg" alt="Mutton Curry">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Mutton Curry</h3>
+                        <p>Slow-cooked mutton in traditional spices with onion and tomato gravy</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹520</span>
+                            <span class="dietary-info">🍖 Non-Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Mutton Curry', '520')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Rice & Biryani -->
+                <div class="menu-item" data-category="rice">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg" alt="Hyderabadi Biryani">
+                        <div class="menu-item-badge">Signature</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Hyderabadi Biryani</h3>
+                        <p>Fragrant basmati rice layered with marinated meat and traditional spices</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹380</span>
+                            <span class="dietary-info">🍖 Non-Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Hyderabadi Biryani', '380')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="rice">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg" alt="Vegetable Biryani">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Vegetable Biryani</h3>
+                        <p>Aromatic basmati rice cooked with mixed vegetables and fragrant spices</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹280</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Vegetable Biryani', '280')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Vegetarian -->
+                <div class="menu-item" data-category="vegetarian">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg" alt="Dal Makhani">
+                        <div class="menu-item-badge">Popular</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Dal Makhani</h3>
+                        <p>Creamy black lentils slow-cooked with butter and aromatic spices</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹280</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Dal Makhani', '280')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="vegetarian">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg" alt="Paneer Butter Masala">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Paneer Butter Masala</h3>
+                        <p>Soft cottage cheese cubes in rich tomato and cashew gravy</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹320</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Paneer Butter Masala', '320')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-item" data-category="desserts">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Gulab Jamun">
+                        <div class="menu-item-badge">Traditional</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Gulab Jamun (2 pieces)</h3>
+                        <p>Traditional milk dumplings in cardamom-flavored sugar syrup</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹180</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Gulab Jamun (2 pieces)', '180')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="desserts">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Kulfi">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Kulfi</h3>
+                        <p>Traditional Indian ice cream flavored with cardamom and pistachios</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹150</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Kulfi', '150')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Beverages -->
+                <div class="menu-item" data-category="beverages">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1410235/pexels-photo-1410235.jpeg" alt="Masala Chai">
+                        <div class="menu-item-badge">House Special</div>
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Special Masala Chai</h3>
+                        <p>Aromatic tea blend with traditional Indian spices and fresh milk</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹80</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Special Masala Chai', '80')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="beverages">
+                    <div class="menu-item-image">
+                        <img src="https://images.pexels.com/photos/1410235/pexels-photo-1410235.jpeg" alt="Fresh Lime Soda">
+                    </div>
+                    <div class="menu-item-info">
+                        <h3>Fresh Lime Soda</h3>
+                        <p>Refreshing lime juice with soda water and a hint of mint</p>
+                        <div class="menu-item-details">
+                            <span class="price">₹120</span>
+                            <span class="dietary-info">🌱 Vegetarian</span>
+                        </div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Fresh Lime Soda', '120')">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Information -->
+    <section class="order-info">
+        <div class="container">
+            <div class="info-content">
+                <h2>How to Order</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">💬</div>
+                        <h3>WhatsApp Order</h3>
+                        <p>Click "Order Now" on any item to place your order via WhatsApp</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🏨</div>
+                        <h3>Room Service</h3>
+                        <p>Available 24/7 for hotel guests with free delivery to your room</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🚚</div>
+                        <h3>Local Delivery</h3>
+                        <p>We deliver to nearby locations within 5km radius</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>Quick Service</h3>
+                        <p>Most orders prepared within 20-30 minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="policies.html">Privacy Policy</a>
+                    <a href="policies.html">Terms of Service</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>

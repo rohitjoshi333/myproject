@@ -1,0 +1,322 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Hotel New Chetan</title>
+    <meta name="description" content="Experience fine dining at Hotel New Chetan restaurant. Authentic Indian cuisine and international dishes prepared by expert chefs.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/restaurant.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link active">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Fine Dining Experience</h1>
+            <p>Savor exquisite cuisine crafted by our talented chefs using the finest ingredients</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Restaurant</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Restaurant Hero -->
+    <section class="restaurant-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Culinary Excellence</h2>
+                    <p>Our restaurant offers an exceptional dining experience with authentic Indian cuisine and international dishes. Our skilled chefs use only the freshest local ingredients to create memorable meals for our guests.</p>
+                    <div class="hero-features">
+                        <div class="feature">
+                            <span class="feature-icon">👨‍🍳</span>
+                            <h4>Expert Chefs</h4>
+                            <p>Experienced culinary professionals</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🌿</span>
+                            <h4>Fresh Ingredients</h4>
+                            <p>Locally sourced, premium quality</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🍽️</span>
+                            <h4>Diverse Menu</h4>
+                            <p>Indian & international cuisine</p>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="{% url 'menu'%}" class="cta-button">View Full Menu</a>
+                        <button class="cta-button secondary" onclick="HotelApp.openWhatsAppChat('Hi! I would like to make a table reservation at Hotel New Chetan restaurant. Please help me with availability.')">Reserve Table</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg" alt="Restaurant Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes -->
+    <section class="featured-dishes">
+        <div class="container">
+            <h2 class="section-title">Chef's Specialties</h2>
+            <p class="section-subtitle">Discover our most popular and signature dishes</p>
+            <div class="dishes-grid">
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg" alt="Butter Chicken">
+                        <div class="dish-category">Main Course</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Butter Chicken</h3>
+                        <p>Tender chicken in rich, creamy tomato-based sauce with aromatic spices</p>
+                        <div class="dish-price">₹450</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Butter Chicken', '450')">Order via WhatsApp</button>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg" alt="Biryani">
+                        <div class="dish-category">Rice</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Hyderabadi Biryani</h3>
+                        <p>Fragrant basmati rice layered with marinated meat and traditional spices</p>
+                        <div class="dish-price">₹380</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Hyderabadi Biryani', '380')">Order via WhatsApp</button>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg" alt="Dal Makhani">
+                        <div class="dish-category">Vegetarian</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Dal Makhani</h3>
+                        <p>Creamy black lentils slow-cooked with butter and aromatic spices</p>
+                        <div class="dish-price">₹280</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Dal Makhani', '280')">Order via WhatsApp</button>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg" alt="Tandoori Platter">
+                        <div class="dish-category">Grilled</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Tandoori Mixed Platter</h3>
+                        <p>Assorted grilled meats and vegetables from our traditional tandoor</p>
+                        <div class="dish-price">₹650</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Tandoori Mixed Platter', '650')">Order via WhatsApp</button>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg" alt="Gulab Jamun">
+                        <div class="dish-category">Dessert</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Gulab Jamun</h3>
+                        <p>Traditional milk dumplings in cardamom-flavored sugar syrup</p>
+                        <div class="dish-price">₹180</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Gulab Jamun', '180')">Order via WhatsApp</button>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.pexels.com/photos/1410235/pexels-photo-1410235.jpeg" alt="Masala Chai">
+                        <div class="dish-category">Beverages</div>
+                    </div>
+                    <div class="dish-info">
+                        <h3>Special Masala Chai</h3>
+                        <p>Aromatic tea blend with traditional Indian spices and fresh milk</p>
+                        <div class="dish-price">₹80</div>
+                        <button class="order-btn" onclick="HotelApp.orderFoodWhatsApp('Special Masala Chai', '80')">Order via WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="menu.html" class="cta-button">View Complete Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Features -->
+    <section class="restaurant-features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Restaurant</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕐</div>
+                    <h3>24/7 Service</h3>
+                    <p>Round-the-clock dining and room service available for your convenience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Fresh & Organic</h3>
+                    <p>We source the finest organic ingredients from local farms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Expert Chefs</h3>
+                    <p>Our experienced chefs bring authentic flavors to every dish</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Diverse Menu</h3>
+                    <p>Wide variety of Indian, Continental, and Chinese cuisines</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏺</div>
+                    <h3>Elegant Ambiance</h3>
+                    <p>Beautiful dining atmosphere perfect for all occasions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Home Delivery</h3>
+                    <p>Quick delivery service to your room or nearby locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Hours -->
+    <section class="dining-hours">
+        <div class="container">
+            <div class="hours-content">
+                <div class="hours-info">
+                    <h2>Dining Hours</h2>
+                    <div class="hours-list">
+                        <div class="hours-item">
+                            <h4>Breakfast</h4>
+                            <span>7:00 AM - 10:30 AM</span>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Lunch</h4>
+                            <span>12:00 PM - 3:30 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Dinner</h4>
+                            <span>7:00 PM - 11:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Room Service</h4>
+                            <span>24 Hours</span>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <p><strong>For Reservations:</strong></p>
+                        <p>📞 +91 98765 43210</p>
+                        <p>✉️ restaurant@hotelnewchetan.com</p>
+                    </div>
+                </div>
+                <div class="hours-image">
+                    <img src="https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg" alt="Restaurant Dining Area">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/restaurant.js"></script>
+</body>
+</html>

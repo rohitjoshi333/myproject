@@ -1,0 +1,261 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Hotel New Chetan</title>
+    <meta name="description" content="Learn about Hotel New Chetan's story, mission, and commitment to exceptional hospitality since 2019. Discover our values and team.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/about.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link active">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>About Hotel New Chetan</h1>
+            <p>Exceptional hospitality and premium service since 2019</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <span>About</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Our Story</h2>
+                    <p>Hotel New Chetan was established in 2019 with a vision to provide exceptional hospitality and create memorable experiences for our guests. Located in the heart of the city, we have quickly become a preferred destination for travelers seeking comfort, luxury, and authentic service.</p>
+                    <p>Our commitment to excellence is reflected in every aspect of our service - from our elegantly designed rooms and world-class dining to our professional event spaces and personalized guest care. We believe that hospitality is not just about providing accommodation; it's about creating a home away from home.</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Years of Excellence</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">10,000+</span>
+                            <span class="stat-label">Happy Guests</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Team Members</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4.8</span>
+                            <span class="stat-label">Guest Rating</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg" alt="Hotel New Chetan">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>To provide exceptional hospitality services that exceed guest expectations while maintaining the highest standards of comfort, quality, and personalized care. We strive to create memorable experiences that make every stay special.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">👁️</div>
+                    <h3>Our Vision</h3>
+                    <p>To be recognized as the premier hospitality destination in the region, known for our commitment to excellence, innovation in service delivery, and our contribution to the local community and tourism industry.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">💎</div>
+                    <h3>Our Values</h3>
+                    <p>Excellence, Integrity, Respect, Innovation, and Sustainability guide everything we do. We believe in treating every guest as family and every team member as a valued contributor to our success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features & Amenities -->
+    <section class="features-amenities">
+        <div class="container">
+            <h2 class="section-title">Why Choose Hotel New Chetan</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏨</div>
+                    <h3>Premium Accommodation</h3>
+                    <p>Luxuriously appointed rooms and suites with modern amenities and elegant décor</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Fine Dining</h3>
+                    <p>Authentic cuisine prepared by expert chefs using the finest local and international ingredients</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎉</div>
+                    <h3>Event Spaces</h3>
+                    <p>Three elegant halls perfect for weddings, conferences, and special celebrations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Prime Location</h3>
+                    <p>Strategically located with easy access to major attractions and business districts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍💼</div>
+                    <h3>Professional Service</h3>
+                    <p>24/7 dedicated staff committed to providing personalized and attentive service</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Modern Facilities</h3>
+                    <p>State-of-the-art amenities including fitness center, business center, and spa services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section class="sustainability">
+        <div class="container">
+            <div class="sustainability-content">
+                <div class="sustainability-text">
+                    <h2>Our Commitment to Sustainability</h2>
+                    <p>At Hotel New Chetan, we believe in responsible hospitality that protects our environment and supports our local community. Our sustainability initiatives include:</p>
+                    <ul class="sustainability-list">
+                        <li>Energy-efficient lighting and appliances throughout the property</li>
+                        <li>Water conservation programs and eco-friendly amenities</li>
+                        <li>Waste reduction and recycling initiatives</li>
+                        <li>Sourcing local and organic ingredients for our restaurant</li>
+                        <li>Supporting local artisans and community projects</li>
+                        <li>Digital-first operations to reduce paper consumption</li>
+                    </ul>
+                    <div class="sustainability-actions">
+                        <button class="cta-button" onclick="HotelApp.openWhatsAppChat('Hi! I would like to learn more about Hotel New Chetan\'s sustainability initiatives and eco-friendly practices.')">Learn More</button>
+                    </div>
+                </div>
+                <div class="sustainability-image">
+                    <img src="https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg" alt="Sustainability Initiatives">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="about-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Experience the Hotel New Chetan Difference</h2>
+                <p>Join thousands of satisfied guests who have made Hotel New Chetan their preferred choice for accommodation, dining, and events.</p>
+                <div class="cta-actions">
+                    <a href="booking.html" class="cta-button">Book Your Stay</a>
+                    <a href="contact.html" class="cta-button secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- WhatsApp Floating Button -->
+<div class="whatsapp-float">
+  <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-link"
+      aria-label="Chat with us on WhatsApp">
+        <span class="icon" aria-hidden="true">
+            <i class="fa-brands fa-whatsapp"></i>
+        </span>
+        <span class="label">We're here to help</span>
+  </a>
+</div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/about.js'%}"></script>
+</body>
+</html>

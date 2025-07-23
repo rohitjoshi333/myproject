@@ -1,0 +1,236 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms - Hotel New Chetan</title>
+    <meta name="description" content="Discover our luxurious rooms at Hotel New Chetan. From deluxe rooms to presidential suites, experience comfort and elegance.">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/rooms.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="nav-logo-img">
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'index'%}" class="nav-link">Home</a></li>
+                <li><a href="{% url 'rooms'%}" class="nav-link active">Rooms</a></li>
+                <li><a href="{% url 'restaurant'%}" class="nav-link">Restaurant</a></li>
+                <li><a href="{% url 'events'%}" class="nav-link">Events</a></li>
+                <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
+                <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
+                <li><a href="{% url 'contact'%}" class="nav-link cta-btn">Login / Signup</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Our Rooms</h1>
+            <p>Experience luxury and comfort in our beautifully designed accommodations</p>
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Rooms</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Room Filters -->
+    <section class="room-filters">
+        <div class="container">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Rooms</button>
+                <button class="filter-btn" data-filter="deluxe">Deluxe</button>
+                <button class="filter-btn" data-filter="suite">Suites</button>
+                <button class="filter-btn" data-filter="family">Family</button>
+                <button class="filter-btn" data-filter="presidential">Presidential</button>
+            </div>
+            <div class="sort-controls">
+                <select id="sortRooms">
+                    <option value="default">Sort by Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="capacity">Guest Capacity</option>
+                    <option value="availability">Availability</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Grid -->
+    <section class="rooms-section">
+        <div class="container">
+            <div class="rooms-grid" id="roomsGrid">
+                <!--Dynamic Rooms -->
+                {%for room in rooms %}
+                <div class="room-card" data-category="{{room.category}}" data-price="{{room.price}}" data-capacity="{{room.guest_count}}">
+                    <div class="room-image">
+                        <img src="{{room.image}}" alt="{{room.name}}">
+                    </div>
+                    <div class="room-status {% if room.status|lower == 'available' %}available{% else %}unavailable{% endif %}">
+                        {{ room.status }}
+                    </div>
+                    <div class="room-info">
+                        <div class="room-category">{{room.category}}</div>
+                        <h3>{{room.name}}</h3>
+                        <p>{{room.description}}</p>
+                        <div class="room-amenities">
+                            <span>📶 WiFi</span>
+                            <span>❄️ AC</span>
+                            <span>📺 TV</span>
+                            <span>☕ Mini Bar</span>
+                        </div>
+                        <div class="room-details">
+                            <div class="room-price">{{room.price}}<span>/night</span></div>
+                            <div class="room-capacity">👥 {{room.guest_count}}</div>
+                        </div>
+                        <div class="room-actions">
+                            <a href="{% url 'roomdetails' %}?room={{ room.category }}" class="view-btn">View Details</a>
+                            <button class="book-btn" onclick="HotelApp.bookRoomWhatsApp('{{room.name}}', '', '')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Features Section -->
+    <section class="room-features">
+        <div class="container">
+            <h2 class="section-title">Room Features & Amenities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📶</div>
+                    <h3>High-Speed WiFi</h3>
+                    <p>Complimentary high-speed internet access in all rooms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❄️</div>
+                    <h3>Climate Control</h3>
+                    <p>Individual air conditioning and heating controls</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛏️</div>
+                    <h3>Premium Bedding</h3>
+                    <p>Luxury linens and comfortable mattresses for perfect sleep</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚿</div>
+                    <h3>Modern Bathrooms</h3>
+                    <p>Spacious bathrooms with premium fixtures and amenities</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☕</div>
+                    <h3>In-Room Dining</h3>
+                    <p>24/7 room service and mini-bar facilities</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Safe & Secure</h3>
+                    <p>Electronic door locks and in-room safety deposit boxes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section class="booking-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Book Your Stay?</h2>
+                <p>Experience comfort and luxury at Hotel New Chetan. Book directly for the best rates and exclusive benefits.</p>
+                <div class="cta-actions">
+                    <a href="booking.html" class="cta-button">Book Online</a>
+                    <button class="cta-button secondary" onclick="HotelApp.openWhatsAppChat('Hi! I would like to make a room reservation at Hotel New Chetan. Please help me with availability and booking details.')">Book via WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hotel New Chetan</h3>
+                    <p>Premium accommodation and exceptional service since 2019</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="rooms.html">Rooms</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="booking.html">Online Booking</a></li>
+                        <li><a href="contact.html">24/7 Support</a></li>
+                        <li><a href="about.html">Concierge</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 Hotel Street, City, State 12345</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ info@hotelnewchetan.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+        <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+    <a  href="https://wa.me/9767462649?text=Hello! I'm interested in booking a room at Hotel New Chetan."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-link"
+        aria-label="Chat with us on WhatsApp">
+            <span class="icon" aria-hidden="true">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="label">We're here to help</span>
+    </a>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+            <div class="cookie-actions">
+                <button id="acceptCookies" class="accept-btn">Accept</button>
+                <button id="declineCookies" class="decline-btn">Decline</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/rooms.js'%}"></script>
+</body>
+</html>
