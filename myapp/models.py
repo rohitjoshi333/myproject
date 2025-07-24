@@ -1,20 +1,18 @@
 from django.db import models
 
 # Create your models here.
-class feature:
-    id: int
-    name: str
-    details: str
-    price: str
-    image: str
+class feature(models.Model):
+    name= models.CharField(max_length=100)
+    details= models.CharField(max_length=200)
+    price= models.CharField(max_length=100)
+    image= models.CharField(max_length=200)
 
-class room:
-    id: int
-    category: str
-    name: str
-    description: str
-    price: str
-    guest_count: str
-    aminities: str
-    image: str
-    status: str
+class room(models.Model):
+    category = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    price = models.CharField(max_length=100)
+    guest_count = models.CharField(max_length=100)
+    aminities = models.CharField(max_length=500)
+    image = models.CharField(max_length=200)
+    status = models.CharField(max_length=100)
