@@ -1,29 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 from django.http import HttpResponse
 from .models import feature
 from .models import room
+from .models import roomdetail
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 def index(request):
-    feature1 = feature()
-    feature1.id = 0
-    feature1.name = 'Deluxe Room'
-    feature1.description = 'Elegant room with modern amenities and city view'
-    feature1.price = '₹2,800'
-
-    feature2 = feature()
-    feature2.id = 1
-    feature2.name = 'Queen Suite'
-    feature2.description = 'Spacious suite with separate living area and premium amenities'
-    feature2.price = '₹4,500'
-    
-    feature3 = feature()
-    feature3.id = 2
-    feature3.name = 'Presidential Suite'
-    feature3.description = 'Ultimate luxury with panoramic views and exclusive services'
-    feature3.price = '₹8,000'
-
-    features = [feature1, feature2, feature3]
-
+    features = feature.objects.all()
     return render(request, 'index.html', {'features': features})
 
 def about_view(request):
@@ -46,86 +32,59 @@ def restaurant_view(request):
 
 def roomdetails_view(request):
     room_category = request.GET.get('room', '').lower()
-
-    # Define all room objects (you can extract this to a helper if needed)
-    room1 = room()
-    room1.id = 0
-    room1.category = 'deluxe'
-    room1.name = 'Deluxe Room'
-    room1.description = 'Elegant room with modern amenities and city view'
-    room1.price = '₹2,800'
-    room1.guest_count = '1 Guests'
-    room1.amenities = [
-        "📶 High-Speed WiFi", "❄️ Air Conditioning", "📺 Smart TV", "☕ Mini Bar",
-        "🛏️ King Size Bed", "🚿 Premium Bathroom", "🔒 Electronic Safe", "☎️ 24/7 Room Service"
-    ]
-
-    room1.images = [
-    "images/rooms/deluxe/deluxe1.jpg",
-    "images/rooms/deluxe/deluxe2.jpg",
-    "images/rooms/deluxe/deluxe3.jpg"
-    ]
-
-    room2 = room()
-    room2.id = 1
-    room2.category = 'family-room'
-    room2.name = 'Queen Suite'
-    room2.description = 'Spacious suite with separate living area and premium amenities'
-    room2.price = '₹4,500'
-    room2.guest_count = '2 Guests'
-    room2.amenities = room1.amenities
-
-    room3 = room()
-    room3.id = 2
-    room3.category = 'presidential-suite'
-    room3.name = 'Presidential Suite'
-    room3.description = 'Ultimate luxury with panoramic views and exclusive services'
-    room3.price = '₹8,000'
-    room3.guest_count = '3 Guests'
-    room3.amenities = room1.amenities
-
-    rooms = [room1, room2, room3]
-
-    # Find room by category
-    selected_room = next((r for r in rooms if r.category.lower() == room_category), None)
-
-    if selected_room:
-        return render(request, 'roomdetails.html', {'room': selected_room})
-    else:
-        return render(request, '404.html', status=404)
+    selected_room = get_object_or_404(roomdetail, category__iexact=room_category)
+    return render(request, 'roomdetails.html', {'room': selected_room})
 
 def rooms_view(request):
-    room1 = room()
-    room1.id = 0
-    room1.category = 'Deluxe'
-    room1.name = 'Deluxe Room'
-    room1.description = 'Elegant room with modern amenities and city view'
-    room1.price = '₹2,800'
-    room1.guest_count = '1 Guests'
-    room1.image = '/static/imgs/deluxe-single.jpg'
-    room1.status = 'Booked'
-
-    room2 = room()
-    room2.id = 1
-    room2.category = 'family-room'
-    room2.name = 'Queen Suite'
-    room2.description = 'Spacious suite with separate living area and premium amenities'
-    room2.price = '₹4,500'
-    room2.guest_count = '2 Guests'
-    room2.image = '/static/imgs/Super Deluxe Room/IMG_6995.jpg'
-    room2.status = 'Unavailable'
-    
-    room3 = room()
-    room3.id = 2
-    room3.category = 'presidential-suite'
-    room3.name = 'Presidential Suite'
-    room3.description = 'Ultimate luxury with panoramic views and exclusive services'
-    room3.price = '₹8,000'
-    room3.guest_count = '3 Guests'
-    room3.image = '/static/imgs/Presidential Suit Room/IMG_6984.jpg'
-    room3.status = 'Available'
-    
-
-    rooms = [room1, room2, room3]
-
+    rooms = room.objects.all()
     return render(request, 'rooms.html', {'rooms': rooms})
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirmPassword = request.POST['confirmPassword']
+
+        if password == confirmPassword:
+            if User.objects.filter(email=email).exists():
+                messages.warning(request, 'Email Has Already Been Used')
+                return redirect('register')
+            elif User.objects.filter(username=username).exists():
+                messages.warning(request, 'Username Has Already Been Used')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username = username, email = email, password = password)
+                user.save();
+                return redirect('login')
+        else:
+            messages.info(request, 'Password doesnot match')
+            return redirect('register')
+    else:
+        return render(request, 'register.html')
+    
+def login(request):
+    if request.method == 'POST':
+        login_input = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user_obj = User.objects.get(email=login_input)
+            username = user_obj.username
+        except User.DoesNotExist:
+            username = login_input 
+        
+        user = auth.authenticate(username = username, password = password)
+        
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Invalid Credentials')
+            return redirect ('login')
+    else:
+        return render(request, 'login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

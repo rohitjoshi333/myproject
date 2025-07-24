@@ -1,10 +1,159 @@
 // Room Details page specific JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
+    initializeRoomDetails();
     initializeDatePickers();
     initializeBookingForm();
+    initializeGallery();
     loadSimilarRooms();
 });
+
+// Room data
+const roomData = {
+};
+
+let currentRoom = null;
+let currentImageIndex = 0;
+let selectedDates = {
+    checkin: '',
+    checkout: '',
+    guests: 1
+};
+
+function initializeRoomDetails() {
+    // Get room type from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomType = urlParams.get('room') || 'deluxe';
+    
+    currentRoom = roomData[roomType];
+    if (!currentRoom) {
+        currentRoom = roomData['deluxe'];
+    }
+    
+    // Load room data
+    loadRoomData();
+}
+
+function loadRoomData() {
+    // Update page title
+    document.title = `${currentRoom.name} - Hotel New Chetan`;
+    
+    // Update room information
+    document.getElementById('roomNameBreadcrumb').textContent = currentRoom.name;
+    document.getElementById('roomCategory').textContent = currentRoom.category;
+    document.getElementById('roomName').textContent = currentRoom.name;
+    document.getElementById('roomDescription').textContent = currentRoom.description;
+    document.getElementById('roomPrice').textContent = `₹${currentRoom.price.toLocaleString()}`;
+    
+    // Update availability status
+    const statusElement = document.getElementById('availabilityStatus');
+    const statusIndicator = statusElement.querySelector('.status-indicator');
+    const statusText = statusElement.querySelector('span:last-child');
+    
+    if (currentRoom.available) {
+        statusIndicator.className = 'status-indicator available';
+        statusText.textContent = 'Available';
+    } else {
+        statusIndicator.className = 'status-indicator unavailable';
+        statusText.textContent = 'Currently Booked';
+    }
+    
+    // Update guest capacity
+    const guestSelect = document.getElementById('guestCount');
+    guestSelect.innerHTML = '';
+    for (let i = 1; i <= currentRoom.capacity; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `${i} Guest${i > 1 ? 's' : ''}`;
+        guestSelect.appendChild(option);
+    }
+    
+    // Load amenities
+    loadAmenities();
+    
+    // Load images
+    loadImages();
+}
+
+function loadAmenities() {
+    const amenitiesGrid = document.getElementById('amenitiesGrid');
+    amenitiesGrid.innerHTML = '';
+    
+    currentRoom.amenities.forEach(amenity => {
+        const amenityElement = document.createElement('div');
+        amenityElement.className = 'amenity-item';
+        amenityElement.innerHTML = `
+            <span class="amenity-icon">${amenity.icon}</span>
+            <span class="amenity-text">${amenity.text}</span>
+        `;
+        amenitiesGrid.appendChild(amenityElement);
+    });
+}
+
+function loadImages() {
+    const mainImage = document.getElementById('mainRoomImage');
+    const thumbnailsContainer = document.getElementById('thumbnailsContainer');
+    const totalImagesSpan = document.getElementById('totalImages');
+    
+    // Set main image
+    mainImage.src = currentRoom.images[0];
+    mainImage.alt = currentRoom.name;
+    
+    // Update image counter
+    totalImagesSpan.textContent = currentRoom.images.length;
+    
+    // Create thumbnails
+    thumbnailsContainer.innerHTML = '';
+    currentRoom.images.forEach((image, index) => {
+        const thumbnail = document.createElement('div');
+        thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+        thumbnail.innerHTML = `<img src="${image}" alt="${currentRoom.name} ${index + 1}">`;
+        thumbnail.addEventListener('click', () => showImage(index));
+        thumbnailsContainer.appendChild(thumbnail);
+    });
+}
+
+function initializeGallery() {
+    const prevBtn = document.getElementById('prevImage');
+    const nextBtn = document.getElementById('nextImage');
+    
+    prevBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + currentRoom.images.length) % currentRoom.images.length;
+        showImage(currentImageIndex);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % currentRoom.images.length;
+        showImage(currentImageIndex);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        }
+    });
+}
+
+function showImage(index) {
+    currentImageIndex = index;
+    const mainImage = document.getElementById('mainRoomImage');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const currentImageSpan = document.getElementById('currentImageIndex');
+    
+    // Update main image
+    mainImage.src = currentRoom.images[index];
+    
+    // Update thumbnails
+    thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+    
+    // Update counter
+    currentImageSpan.textContent = index + 1;
+}
 
 function initializeDatePickers() {
     const today = new Date().toISOString().split('T')[0];

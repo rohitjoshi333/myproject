@@ -129,27 +129,8 @@
                             </div>
                         </div>
 
-                        <div class="pricing-info">
-                            <h4>Pricing</h4>
-                            <div class="price-list">
-                                <div class="price-item">
-                                    <span>Half Day (4 hours)</span>
-                                    <span class="price">₹25,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Full Day (8 hours)</span>
-                                    <span class="price">₹45,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Wedding Package</span>
-                                    <span class="price">₹75,000</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="hall-actions">
-                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Grand Ballroom')">Book This Hall</button>
-                            <button class="details-btn" onclick="showHallDetails('grand-ballroom')">More Details</button>
+                            <button class="details-btn" onclick="HotelApp.inquireEventHall('Grand Ballroom')">Make Inquire</button>
                         </div>
                     </div>
                 </div>
@@ -193,28 +174,8 @@
                                 <span>Tea/Coffee Service</span>
                             </div>
                         </div>
-
-                        <div class="pricing-info">
-                            <h4>Pricing</h4>
-                            <div class="price-list">
-                                <div class="price-item">
-                                    <span>Half Day (4 hours)</span>
-                                    <span class="price">₹12,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Full Day (8 hours)</span>
-                                    <span class="price">₹20,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Monthly Package</span>
-                                    <span class="price">₹3,50,000</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="hall-actions">
-                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Conference Hall')">Book This Hall</button>
-                            <button class="details-btn" onclick="showHallDetails('conference-hall')">More Details</button>
+                            <button class="details-btn" onclick="HotelApp.inquireEventHall('Conference Hall')">Make Inquire</button>
                         </div>
                     </div>
                 </div>
@@ -258,28 +219,8 @@
                                 <span>Photo Booth Space</span>
                             </div>
                         </div>
-
-                        <div class="pricing-info">
-                            <h4>Pricing</h4>
-                            <div class="price-list">
-                                <div class="price-item">
-                                    <span>Half Day (4 hours)</span>
-                                    <span class="price">₹8,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Full Day (8 hours)</span>
-                                    <span class="price">₹15,000</span>
-                                </div>
-                                <div class="price-item">
-                                    <span>Birthday Package</span>
-                                    <span class="price">₹12,000</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="hall-actions">
-                            <button class="book-hall-btn" onclick="HotelApp.inquireEventHall('Celebration Hall')">Book This Hall</button>
-                            <button class="details-btn" onclick="showHallDetails('celebration-hall')">More Details</button>
+                            <button class="details-btn" onclick="HotelApp.inquireEventHall('Celebration Hall')">Make Inquire</button>
                         </div>
                     </div>
                 </div>
@@ -497,8 +438,7 @@
             </div>
         </div>
     </div>
-
-    <script src="js/main.js"></script>
-    <script src="js/events.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static 'js/events.js'%}"></script>
 </body>
 </html>

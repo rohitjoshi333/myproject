@@ -29,7 +29,11 @@
                 <li><a href="{% url 'gallery'%}" class="nav-link">Gallery</a></li>
                 <li><a href="{% url 'about'%}" class="nav-link">About</a></li>
                 <li><a href="{% url 'contact'%}" class="nav-link">Contact</a></li>
-                <li><a href="{% url 'contact'%}" class="nav-link cta-btn login-btn">Login / Signup</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout'%}" class="nav-link cta-btn nav-login-btn">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'login'%}" class="nav-link cta-btn nav-login-btn">Login / Signup</a></li>
+                {% endif %}
             </ul>
 
             <div class="hamburger" id="hamburger">
@@ -45,7 +49,11 @@
         <div class="hero-slider" id="heroSlider">
             <div class="slide active" style="background-image: url('{% static 'imgs/index.jpg'%}');">
                 <div class="slide-content">
+                    {% if user.is_authenticated %}
+                    <h1>Welcome, {{user.username}}</h1>
+                    {% else %}
                     <h1>Luxury Awaits You</h1>
+                    {% endif %}
                     <p>Experience premium comfort and exceptional service at Hotel New Chetan</p>
                     <a href="rooms.html" class="cta-button">Explore Rooms</a>
                 </div>

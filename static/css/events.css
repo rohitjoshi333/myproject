@@ -118,7 +118,7 @@
 
 .halls-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
@@ -381,14 +381,14 @@
 }
 
 .package-header {
-    background: var(--primary-navy);
+    background: var(--primary-yellow);
     color: var(--primary-white);
     padding: 2rem;
     text-align: center;
 }
 
 .package-header h3 {
-    color: var(--primary-white);
+    color: var(--text-dark);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
@@ -401,8 +401,9 @@
 }
 
 .package-duration {
-    font-size: 0.9rem;
-    opacity: 0.8;
+    font-size: 1rem;
+    opacity: 1;
+    color: rgb(0, 41, 72);
 }
 
 .package-features {
@@ -446,10 +447,6 @@
     transition: var(--transition);
     font-family: inherit;
     font-size: 1rem;
-}
-
-.package-btn:hover {
-    background: var(--primary-navy);
 }
 
 /* Booking Process */

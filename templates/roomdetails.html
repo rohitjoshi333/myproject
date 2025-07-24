@@ -49,20 +49,21 @@
                     <a href="index.html">Home</a> / <a href="rooms.html">Rooms</a> / <span id="roomNameBreadcrumb">Room Details</span>
                 </nav>
             </div>
-
             <!-- Room Gallery -->
             <section class="room-gallery">
                 <div class="main-image">
-                    <img id="mainRoomImage" src="" alt="Room Image">
+                    <img id="mainRoomImage" src="{% static room.get_images_list.0 %}" alt="Room Image">
                     <div class="image-counter">
-                        <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
+                        <span id="currentImageIndex">1</span> / <span id="totalImages">{{ room.get_images_list|length }}</span>
                     </div>
                     <button class="gallery-nav-btn gallery-prev" id="prevImage">‹</button>
                     <button class="gallery-nav-btn gallery-next" id="nextImage">›</button>
                 </div>
                 <div class="thumbnail-gallery">
                     <div class="thumbnails-container" id="thumbnailsContainer">
-                        <!-- Thumbnails will be populated by JavaScript -->
+                        {% for img in room.get_images_list %}
+                            <img class="thumbnail" src="{% static img %}" alt="Room Thumbnail">
+                        {% endfor %}
                     </div>
                 </div>
             </section>
@@ -84,13 +85,12 @@
                             <h3>Description</h3>
                             <p id="roomDescription">{{room.description}}</p>
                         </div>
-
+                        <h3>Amenities</h3>
                         <div class="amenities-grid" id="amenitiesGrid">
-                            {% for amenity in room.amenities %}
-                                <span>{{ amenity }}</span>
-                            {% endfor %}
+                        {% for amenity in room.get_amenities_list %}
+                          <span>{{ amenity }}</span>
+                        {% endfor %}
                         </div>
-
                         <div class="room-policies">
                             <h3>Policies</h3>
                             <div class="policies-grid">
@@ -326,8 +326,96 @@
             <span class="label">We're here to help</span>
     </a>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkinDate = document.getElementById('checkinDate');
+    const checkoutDate = document.getElementById('checkoutDate');
+    const guestCount = document.getElementById('guestCount');
+    const roomPrice = parseFloat(document.getElementById('roomPrice').textContent.replace(/[^\d.]/g, ''));
+    const priceBreakdown = document.getElementById('priceBreakdown');
+    const nightCountEl = document.getElementById('nightCount');
+    const subtotalEl = document.getElementById('subtotal');
+    const taxesEl = document.getElementById('taxes');
+    const totalPriceEl = document.getElementById('totalPrice');
+    const bookNowBtn = document.getElementById('bookNowBtn');
+    const bookingModal = document.getElementById('bookingModal');
+    const modalClose = document.getElementById('modalClose');
 
-    <script src="{% static 'js/main.js'%}"></script>
-    <script src="{% static 'js/room-details.js'%}"></script>
+    const summaryRoomName = document.getElementById('summaryRoomName');
+    const summaryCheckin = document.getElementById('summaryCheckin');
+    const summaryCheckout = document.getElementById('summaryCheckout');
+    const summaryGuests = document.getElementById('summaryGuests');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const bookingDetailsForm = document.getElementById('bookingDetailsForm');
+
+    function calculatePrice() {
+        const inDate = new Date(checkinDate.value);
+        const outDate = new Date(checkoutDate.value);
+
+        if (!isNaN(inDate) && !isNaN(outDate) && outDate > inDate) {
+            const nights = Math.ceil((outDate - inDate) / (1000 * 60 * 60 * 24));
+            const subtotal = nights * roomPrice;
+            const taxRate = 0.13;  // 13% tax
+            const taxes = Math.round(subtotal * taxRate);
+            const total = subtotal + taxes;
+
+            nightCountEl.textContent = nights;
+            subtotalEl.textContent = `₹${subtotal}`;
+            taxesEl.textContent = `₹${taxes}`;
+            totalPriceEl.textContent = `₹${total}`;
+            priceBreakdown.style.display = 'block';
+        } else {
+            priceBreakdown.style.display = 'none';
+        }
+    }
+
+    checkinDate.addEventListener('change', calculatePrice);
+    checkoutDate.addEventListener('change', calculatePrice);
+
+    bookNowBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!checkinDate.value || !checkoutDate.value) {
+            alert("Please select check-in and check-out dates.");
+            return;
+        }
+
+        // Set summary data
+        summaryRoomName.textContent = document.title || "Selected Room";
+        summaryCheckin.textContent = checkinDate.value;
+        summaryCheckout.textContent = checkoutDate.value;
+        summaryGuests.textContent = guestCount.value;
+        summaryTotal.textContent = totalPriceEl.textContent;
+
+        bookingModal.style.display = 'block';
+    });
+
+    modalClose.addEventListener('click', function () {
+        bookingModal.style.display = 'none';
+    });
+
+    bookingDetailsForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('guestName').value;
+        const email = document.getElementById('guestEmail').value;
+        const phone = document.getElementById('guestPhone').value;
+        const address = document.getElementById('guestAddress').value;
+        const specialReq = document.getElementById('specialRequests').value;
+
+        const message = `Hello, I would like to book a room.\n\nBooking Details:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nCheck-in: ${checkinDate.value}\nCheck-out: ${checkoutDate.value}\nGuests: ${guestCount.value}\nTotal: ${totalPriceEl.textContent}\nAddress: ${address}\nSpecial Requests: ${specialReq}`;
+
+        const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // Optional: close modal when clicking outside content
+    document.querySelector('.modal-overlay').addEventListener('click', function (e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            bookingModal.style.display = 'none';
+        }
+    });
+});
+</script>
+
 </body>
 </html>
