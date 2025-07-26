@@ -8,8 +8,10 @@
     <meta name="description" content="Detailed information about our luxury rooms at Hotel New Chetan. View amenities, pricing, and book your perfect accommodation.">
     <link rel="stylesheet" href="{% static 'css/main.css'%}">
     <link rel="stylesheet" href="{% static 'css/room-details.css'%}">
+    <link rel="stylesheet" href="{% static 'css/rooms.css'%}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -49,20 +51,22 @@
                     <a href="index.html">Home</a> / <a href="rooms.html">Rooms</a> / <span id="roomNameBreadcrumb">Room Details</span>
                 </nav>
             </div>
+
             <!-- Room Gallery -->
             <section class="room-gallery">
                 <div class="main-image">
-                    <img id="mainRoomImage" src="{% static room.get_images_list.0 %}" alt="Room Image">
+                    <img id="mainRoomImage" src="{{ room.images.all.0.image.url }}" alt="Room Image">
                     <div class="image-counter">
-                        <span id="currentImageIndex">1</span> / <span id="totalImages">{{ room.get_images_list|length }}</span>
+                        <span id="currentImageIndex">1</span> / <span id="totalImages">{{ room.images.all|length }}</span>
                     </div>
                     <button class="gallery-nav-btn gallery-prev" id="prevImage">‹</button>
                     <button class="gallery-nav-btn gallery-next" id="nextImage">›</button>
                 </div>
+
                 <div class="thumbnail-gallery">
                     <div class="thumbnails-container" id="thumbnailsContainer">
-                        {% for img in room.get_images_list %}
-                            <img class="thumbnail" src="{% static img %}" alt="Room Thumbnail">
+                        {% for img in room.images.all %}
+                            <img class="thumbnail" src="{{ img.image.url }}" alt="Room Thumbnail">
                         {% endfor %}
                     </div>
                 </div>
@@ -87,10 +91,10 @@
                         </div>
                         <h3>Amenities</h3>
                         <div class="amenities-grid" id="amenitiesGrid">
-                        {% for amenity in room.get_amenities_list %}
-                          <span>{{ amenity }}</span>
+                        {% for icon, name in room.get_amenities_with_icons %}
+                            <span><i class="fa {{ icon }}"></i> {{ name }}</span>
                         {% endfor %}
-                        </div>
+                        </div><br>
                         <div class="room-policies">
                             <h3>Policies</h3>
                             <div class="policies-grid">
@@ -133,12 +137,10 @@
                                     <span class="price" id="roomPrice">{{room.price}}</span>
                                     <span class="price-unit">/night</span>
                                 </div>
-                                <div class="availability-status" id="availabilityStatus">
-                                    <span class="status-indicator available"></span>
-                                    <span>Available</span>
-                                </div>
+                            <div class="room-status {% if room.status|lower == 'available' %}available{% else %}unavailable{% endif %}">
+                                {{ room.status }}
                             </div>
-
+                            </div>
                             <div class="booking-form">
                                 <div class="date-inputs">
                                     <div class="input-group">
@@ -157,9 +159,6 @@
                                         <option value="1">1 Guest</option>
                                         <option value="2">2 Guests</option>
                                         <option value="3">3 Guests</option>
-                                        <option value="4">4 Guests</option>
-                                        <option value="5">5 Guests</option>
-                                        <option value="6">6 Guests</option>
                                     </select>
                                 </div>
 
@@ -208,10 +207,31 @@
             </section>
 
             <!-- Similar Rooms -->
-            <section class="similar-rooms">
-                <h2>Similar Rooms</h2>
-                <div class="similar-rooms-grid" id="similarRoomsGrid">
-                    <!-- Similar rooms will be populated by JavaScript -->
+            <section class="rooms-section">
+                <h3>Similar Rooms</h3>
+                <div class="rooms-grid" id="roomsGrid">
+                    {% for sim_room in similar_rooms %}
+                    <div class="room-card">
+                        <div class="room-image">
+                            {% if sim_room.thumbnail %}
+                            <img src="{{ sim_room.thumbnail.url }}" alt="{{ sim_room.name }}">
+                            {% else %}
+                            <img src="{% static 'imgs/default-room.jpg' %}" alt="{{ sim_room.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="room-status {% if room.status|lower == 'available' %}available{% else %}unavailable{% endif %}">
+                            {{ room.status }}
+                        </div>
+                        <div class="room-info">
+                            <h4>{{ sim_room.name }}</h4>
+                            <p>{{ sim_room.description|truncatechars:100 }}</p>
+                            <div class="room-price">NPR.{{ sim_room.price }}<span>/night</span></div><br>
+                            <a href="{% url 'roomdetails' %}?room_id={{ sim_room.id }}" class="view-btn">View Details</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>No similar rooms found.</p>
+                    {% endfor %}
                 </div>
             </section>
         </div>
@@ -304,11 +324,6 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="policies.html">Privacy Policy</a>
-                    <a href="policies.html">Terms of Service</a>
-                    <a href="faq.html">FAQ</a>
-                </div>
             </div>
         </div>
     </footer>

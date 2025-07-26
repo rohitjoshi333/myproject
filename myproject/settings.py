@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import pillow_heif
+pillow_heif.register_heif_opener()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +28,11 @@ SECRET_KEY = "django-insecure-uihw)z3bld_l+&zjd6h10u(1_pzqx!03^q^1^(9fi_*76942u1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', '972dc52877e9.ngrok-free.app',]
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '726e035bdab0.ngrok-free.app',  # your current ngrok domain
+]
 
 
 # Application definition
@@ -124,3 +131,6 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

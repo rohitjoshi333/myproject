@@ -97,7 +97,7 @@
 /* Rooms Section */
 .rooms-section {
     padding: 3rem 0;
-    background: var(--primary-cream);
+    background: var(--primary-white);
 }
 
 .rooms-grid {
@@ -107,6 +107,7 @@
 }
 
 .room-card {
+    max-width: 400px;
     background: var(--primary-white);
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -299,7 +300,7 @@
 }
 
 .book-btn:hover {
-    background: var(--primary-navy);
+    background: var(--text-dark);
     transform: translateY(-2px);
 }
 

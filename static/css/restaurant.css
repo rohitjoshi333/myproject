@@ -2,8 +2,8 @@
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.334), rgba(0, 0, 0, 0.284)),
-                url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.772)),
+                url('/static/imgs/Bar.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -215,8 +215,10 @@
 }
 
 .order-btn:hover {
-    background: var(--primary-navy);
     transform: translateY(-2px);
+    background: transparent;
+    color: var(--primary-gold);
+    border: 2px solid var(--primary-gold);
 }
 
 /* Restaurant Features */

@@ -9,6 +9,7 @@
     <meta name="description" content="Experience luxury at Hotel New Chetan. Premium rooms, fine dining, and exceptional service since 2019. Book your stay today!">
     <link rel="stylesheet" href="{% static 'css/main.css'%}">
     <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'css/rooms.css'%}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -126,31 +127,50 @@
             <h2 class="section-title">Featured Rooms</h2>
             <p class="section-subtitle">Experience comfort and luxury in our carefully designed rooms</p>
             <div class="rooms-grid">
-
-                {%for feature in features %}
-                <div class="room-card">
+                {% for room in rooms %}
+                <div class="room-card" data-category="{{ room.category }}" data-price="{{ room.price }}" data-capacity="{{ room.guest_count }}">
                     <div class="room-image">
-                        <img src="{% static 'imgs/deluxe-single.jpg'%}" alt="Deluxe Room">
+                        {% if room.thumbnail %}
+                            <img src="{{ room.thumbnail.url }}" alt="{{ room.name }}">
+                        {% else %}
+                            <img src="{% static 'images/default-room.jpg' %}" alt="Default Room Image">
+                        {% endif %}
+                    </div>
+                    <div class="room-status {% if room.status|lower == 'available' %}available{% else %}unavailable{% endif %}">
+                        {{ room.status }}
                     </div>
                     <div class="room-info">
-                        <h3>{{feature.name}}</h3>
-                        <p>{{feature.description}}</p>
-                        <div class="room-price">{{feature.price}}<span>/night</span></div>
-                        <div class="room-features">
-                            <span>2 Guests</span>
-                            <span>WiFi</span>
-                            <span>AC</span>
+                        <div class="room-category">{{ room.category }}</div>
+                        <h3>{{ room.name }}</h3>
+                        <p>{{ room.description }}</p>
+                        <h3>Amenities</h3>
+                        <div class="amenities text-sm text-gray-600 flex flex-wrap gap-2">
+                        {% with room.get_amenities_with_icons as amenities %}
+                            {% for icon, label in amenities|slice:":2" %}
+                            <span><i class="fa {{ icon }}"></i> {{ label }}</span>
+                            {% endfor %}
+                            {% if amenities|length > 2 %}
+                            <span>+{{ amenities|length|add:"-2" }} more</span>
+                            {% endif %}
+                        {% endwith %}
+                        </div><br>
+                        <div class="room-details">
+                            <div class="room-price">NPR.{{ room.price }}<span>/night</span></div>
+                            <div class="room-capacity">👥 {{ room.guest_count }} Guests</div>
                         </div>
-                        <button class="room-btn">Book Now</button>
+                        <div class="room-actions">
+                            <a href="{% url 'roomdetails' %}?room_id={{ room.id }}" class="view-btn">View Details</a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             <div class="section-cta">
-                <a href="rooms.html" class="cta-button">View All Rooms</a>
+                <a href="{% url 'rooms' %}" class="cta-button">View All Rooms</a>
             </div>
         </div>
     </section>
+
 
     <!-- Restaurant Preview -->
     <section class="restaurant-preview">
@@ -171,7 +191,7 @@
                     </div>
                 </div>
                 <div class="preview-image">
-                    <img src="{% static 'imgs/Bar,Restro,Overall hotel img/Family-Resturant.jpg'%}" alt="Restaurant Interior">
+                    <img src="{% static 'imgs/Family-Resturant.jpg'%}" alt="Restaurant Interior">
                 </div>
             </div>
         </div>
@@ -180,30 +200,30 @@
     <!-- Gallery Preview -->
     <section class="gallery-preview">
         <div class="container">
-            <h2 class="section-title">Gallery Highlights</h2>
+            <h2 class="section-title">Gallery Highlights</h2><br>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="{% static 'imgs/banquet.jpg'%}" alt="Hotel Interior">
+                    <img src="{% static 'imgs/IMG_2472.jpeg'%}" alt="Hotel Interior">
                     <div class="gallery-overlay">
-                        <h3>Hotel Interior</h3>
+                        <h3>Hotel Top View</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
                     <img src="{% static 'imgs/Bar.jpg'%}" alt="Local Attractions">
                     <div class="gallery-overlay">
-                        <h3>Nearby Attractions</h3>
+                        <h3>Reception</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
                     <img src="{% static 'imgs/big_banquet.jpg'%}" alt="Event Halls">
                     <div class="gallery-overlay">
-                        <h3>Event Spaces</h3>
+                        <h3>Banquet Hall</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
                     <img src="{% static 'imgs/suite202.jpg'%}" alt="Dining Area">
                     <div class="gallery-overlay">
-                        <h3>Dining Experience</h3>
+                        <h3>Presidential Suite</h3>
                     </div>
                 </div>
             </div>
@@ -220,16 +240,16 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="HC-logo.png" alt="Hotel New Chetan Logo" class="footer-logo-img">
+                        <img src="{% static 'imgs/HC-logo.png'%}" alt="Hotel New Chetan Logo" class="footer-logo-img"><br>
                         <div class="footer-logo-text">
                             <h3>Hotel New Chetan</h3>
                         </div>
                     </div>
                     <p>Premium accommodation and exceptional service since 2019</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook">📘</a>
-                        <a href="#" aria-label="Instagram">📷</a>
-                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -252,13 +272,20 @@
                 </div>
                 <div class="footer-section">
                     <h4>Contact Info</h4>
-                    <p>📍 123 Hotel Street, City, State 12345</p>
-                    <p>📞 +91 98765 43210</p>
-                    <p>✉️ info@hotelnewchetan.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <a href=""> Mahendranager, Kanchanpur</a></p>
+
+                    <p><i class="fas fa-phone-alt"></i> 
+                    <a href="tel:+099521557"> +099-521557</a>, 
+                    <a href="tel:+9779845352642"> +977-9845352642</a>
+                    </p>
+
+                    <p><i class="fas fa-envelope"></i> 
+                    <a href="mailto:info@hotelnewchetan.com"> info@hotelnewchetan.com</a>
+                    </p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Hotel New Chetan. All rights reserved.</p>
+              <br><p>&copy; 2025 Hotel New Chetan. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/rooms.css'%}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yzJjv7Xi0Uetc..." crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
@@ -55,9 +56,8 @@
             <div class="filter-controls">
                 <button class="filter-btn active" data-filter="all">All Rooms</button>
                 <button class="filter-btn" data-filter="deluxe">Deluxe</button>
-                <button class="filter-btn" data-filter="suite">Suites</button>
-                <button class="filter-btn" data-filter="family">Family</button>
-                <button class="filter-btn" data-filter="presidential">Presidential</button>
+                <button class="filter-btn" data-filter="suite">Super Deluxe</button>
+                <button class="filter-btn" data-filter="family">Suite</button>
             </div>
             <div class="sort-controls">
                 <select id="sortRooms">
@@ -79,7 +79,7 @@
                 {%for room in rooms %}
                 <div class="room-card" data-category="{{room.category}}" data-price="{{room.price}}" data-capacity="{{room.guest_count}}">
                     <div class="room-image">
-                        <img src="{{room.image}}" alt="{{room.name}}">
+                        <img src="{{room.thumbnail.url}}" alt="{{room.name}}">
                     </div>
                     <div class="room-status {% if room.status|lower == 'available' %}available{% else %}unavailable{% endif %}">
                         {{ room.status }}
@@ -88,19 +88,23 @@
                         <div class="room-category">{{room.category}}</div>
                         <h3>{{room.name}}</h3>
                         <p>{{room.description}}</p>
-                        <div class="room-amenities">
-                            <span>📶 WiFi</span>
-                            <span>❄️ AC</span>
-                            <span>📺 TV</span>
-                            <span>☕ Mini Bar</span>
-                        </div>
+                        <h3>Amenities</h3>
+                        <div class="amenities text-sm text-gray-600 flex flex-wrap gap-2">
+                        {% with room.get_amenities_with_icons as amenities %}
+                            {% for icon, label in amenities|slice:":2" %}
+                            <span><i class="fa {{ icon }}"></i> {{ label }}</span>
+                            {% endfor %}
+                            {% if amenities|length > 2 %}
+                            <span>+{{ amenities|length|add:"-2" }} more</span>
+                            {% endif %}
+                        {% endwith %}
+                        </div><br>
                         <div class="room-details">
-                            <div class="room-price">{{room.price}}<span>/night</span></div>
-                            <div class="room-capacity">👥 {{room.guest_count}}</div>
+                            <div class="room-price">NPR.{{room.price}}<span>/night</span></div>
+                            <div class="room-capacity">👥 {{room.guest_count}} Guests</div>
                         </div>
                         <div class="room-actions">
-                            <a href="{% url 'roomdetails' %}?room={{ room.category }}" class="view-btn">View Details</a>
-                            <button class="book-btn" onclick="HotelApp.bookRoomWhatsApp('{{room.name}}', '', '')">Book Now</button>
+                            <a href="{% url 'roomdetails' %}?room_id={{ room.id }}" class="view-btn">View Details</a>
                         </div>
                     </div>
                 </div>

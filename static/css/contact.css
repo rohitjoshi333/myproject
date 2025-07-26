@@ -101,8 +101,7 @@
 }
 
 .contact-btn:hover {
-    background: var(--primary-navy);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 /* Contact Form Section */
@@ -394,10 +393,6 @@
     transition: var(--transition);
     font-family: inherit;
     font-size: 1rem;
-}
-
-.faq-question:hover {
-    background: var(--primary-cream);
 }
 
 .faq-icon {

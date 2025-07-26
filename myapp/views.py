@@ -2,15 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import feature
-from .models import room
-from .models import roomdetail
+from .models import Room
 from django.shortcuts import get_object_or_404
+import re
 
 # Create your views here.
 def index(request):
-    features = feature.objects.all()
-    return render(request, 'index.html', {'features': features})
+    rooms = Room.objects.all()[:3]
+    return render(request, 'index.html', {'rooms': rooms})
 
 def about_view(request):
     return render(request, 'about.html')
@@ -30,13 +29,33 @@ def menu_view(request):
 def restaurant_view(request):
     return render(request, 'restaurant.html')
 
+def clean_price(price_str):
+    # Remove any non-digit and non-dot characters
+    cleaned = re.sub(r'[^\d.]', '', price_str)
+    try:
+        return float(cleaned)
+    except ValueError:
+        return 0
+
 def roomdetails_view(request):
-    room_category = request.GET.get('room', '').lower()
-    selected_room = get_object_or_404(roomdetail, category__iexact=room_category)
-    return render(request, 'roomdetails.html', {'room': selected_room})
+    room_id = request.GET.get('room_id')
+    room = get_object_or_404(Room, id=room_id)
+
+    price = room.price
+    price_tolerance = 50
+    similar_rooms = Room.objects.filter(
+        price__gte=price - price_tolerance,
+        price__lte=price + price_tolerance
+    ).exclude(id=room.id)[:3]  # limit to 3 similar rooms
+
+    context = {
+        'room': room,
+        'similar_rooms': similar_rooms,
+    }
+    return render(request, 'roomdetails.html', context)
 
 def rooms_view(request):
-    rooms = room.objects.all()
+    rooms = Room.objects.all()
     return render(request, 'rooms.html', {'rooms': rooms})
 
 def register(request):
@@ -88,3 +107,6 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def post(request, pk):
+    return render(request, 'post.html', {'pk': pk})

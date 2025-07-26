@@ -55,7 +55,15 @@ p {
     margin-bottom: 1rem;
     color: var(--text-light);
 }
-
+.amenities-grid span {
+    display: inline-block;
+    margin: 5px 10px;
+    font-size: 16px;
+}
+.amenities-grid i {
+    margin-right: 5px;
+    color: #555;
+}
 /* Container */
 .container {
     max-width: 1200px;
@@ -402,9 +410,12 @@ p {
 
 /* Footer */
 .footer {
-    background: rgb(31, 31, 31);
+        background: linear-gradient(rgba(0, 0, 0, 0.308),rgba(47, 0, 0, 0.195)),
+                url('/static/imgs/Footer-Background.jpg');
     color: var(--primary-white);
-    padding: 3rem 0 1rem;
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0 30px;
 }
 
 .footer-content {
