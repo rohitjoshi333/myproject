@@ -1,4 +1,3 @@
-altair @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/altair_1699282542592/work
 anaconda-catalogs @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/anaconda-catalogs_1701813581302/work
 appnope @ file:///Users/builder/cbouss/perseverance-python-buildout/croot/appnope_1699303798458/work
 archspec @ file:///croot/archspec_1709217642129/work
