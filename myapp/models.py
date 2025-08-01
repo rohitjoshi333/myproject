@@ -1,19 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from PIL import Image
-import pillow_heif
 import os
 from io import BytesIO
 from django.core.files.base import ContentFile
-
-pillow_heif.register_heif_opener()
-
-def validate_image_format(image):
-    try:
-        img = Image.open(image)
-        img.verify()
-    except Exception:
-        raise ValidationError("Unsupported or corrupted image format.")
 
 class Room(models.Model):
     ROOM_STATUS_CHOICES = [
@@ -78,17 +68,6 @@ class RoomImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.room.name}"
-
-
-    def save(self, *args, **kwargs):
-        if self.image and self.image.name.lower().endswith('.heic'):
-            img = Image.open(self.image)
-            rgb_image = img.convert('RGB')
-            buffer = BytesIO()
-            rgb_image.save(buffer, format='JPEG')
-            new_name = os.path.splitext(self.image.name)[0] + '.jpg'
-            self.image.save(new_name, ContentFile(buffer.getvalue()), save=False)
-        super().save(*args, **kwargs)
 
 class Menu(models.Model):
     FOOD_TYPE = [
