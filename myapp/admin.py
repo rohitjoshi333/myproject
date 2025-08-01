@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room, RoomImage  # import RoomImage
+from .models import Room, RoomImage, Menu, images
 
 class RoomImageInline(admin.TabularInline):
     model = RoomImage
@@ -8,5 +8,7 @@ class RoomImageInline(admin.TabularInline):
 class RoomAdmin(admin.ModelAdmin):
     inlines = [RoomImageInline]
 
-admin.site.register(Room, RoomAdmin)  # use RoomAdmin with inline images
-admin.site.register(RoomImage)  # optional: lets you manage images directly if needed
+admin.site.register(Room, RoomAdmin)
+admin.site.register(RoomImage)  
+admin.site.register(Menu)
+admin.site.register(images)

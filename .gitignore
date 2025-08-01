@@ -3,3 +3,4 @@ static/imgs/
 __pycache__/
 *.pyc
 *.pyo
+media

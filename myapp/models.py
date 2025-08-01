@@ -15,8 +15,6 @@ def validate_image_format(image):
     except Exception:
         raise ValidationError("Unsupported or corrupted image format.")
 
-from django.db import models
-
 class Room(models.Model):
     ROOM_STATUS_CHOICES = [
         ('available', 'Available'),
@@ -83,7 +81,6 @@ class RoomImage(models.Model):
 
 
     def save(self, *args, **kwargs):
-        # Auto convert HEIC to JPEG
         if self.image and self.image.name.lower().endswith('.heic'):
             img = Image.open(self.image)
             rgb_image = img.convert('RGB')
@@ -92,3 +89,29 @@ class RoomImage(models.Model):
             new_name = os.path.splitext(self.image.name)[0] + '.jpg'
             self.image.save(new_name, ContentFile(buffer.getvalue()), save=False)
         super().save(*args, **kwargs)
+
+class Menu(models.Model):
+    FOOD_TYPE = [
+        ('vegetarian', 'Vegetarian'),
+        ('non-vegetarian', 'Non-Vegetarian'),
+    ]
+
+    category = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    description = models.TextField(default='No description')
+    price = models.PositiveIntegerField(default=0) 
+    badge = models.TextField(blank = True)
+    thumbnail = models.ImageField(upload_to='food_thumnail/', null=True, blank=True)
+    type = models.CharField(max_length=50, choices=FOOD_TYPE)
+
+class images(models.Model):
+    IMAGE_CATEGORY = [
+        ('rooms', 'Rooms'),
+        ('resturant', 'Resturant'),
+        ('lobby', 'Lobby'),
+        ('facilities', 'Facilities'),
+        ('events', 'Events'),
+    ]
+    category = models.CharField(max_length=50, choices=IMAGE_CATEGORY)
+    name = models.CharField(max_length=100)
+    thumbnail = models.ImageField(upload_to='gallery_images/', null=True, blank=True)

@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Room
+from .models import Room, Menu, images
 from django.shortcuts import get_object_or_404
 import re
 
-# Create your views here.
 def index(request):
     rooms = Room.objects.all()[:3]
     return render(request, 'index.html', {'rooms': rooms})
@@ -21,16 +20,17 @@ def events_view(request):
     return render(request, 'events.html')
 
 def gallery_view(request):
-    return render(request, 'gallery.html')
+    gallery = images.objects.all()
+    return render(request, 'gallery.html', {'gallery': gallery})
 
 def menu_view(request):
-    return render(request, 'menu.html')
+    menu = Menu.objects.all()
+    return render(request, 'menu.html', {'menu': menu})
 
 def restaurant_view(request):
     return render(request, 'restaurant.html')
 
 def clean_price(price_str):
-    # Remove any non-digit and non-dot characters
     cleaned = re.sub(r'[^\d.]', '', price_str)
     try:
         return float(cleaned)
