@@ -4,3 +4,8 @@ dj-database-url==2.1.0
 whitenoise==6.6.0
 python-dotenv==1.0.1
 Pillow==10.3.0
+
+# Add build tools explicitly
+pip>=25.2
+setuptools>=68.2.0
+wheel>=0.43.0
