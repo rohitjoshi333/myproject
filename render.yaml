@@ -1,13 +1,17 @@
 services:
   - type: web
-    name: your-service-name
+    name: my-django-app
+    env: python
+    plan: free
     buildCommand: |
       python --version && \
       python -m pip install --upgrade pip setuptools wheel && \
       python -m pip install --no-build-isolation -r requirements.txt && \
       python manage.py collectstatic --no-input && \
       python manage.py migrate
-    startCommand: gunicorn yourprojectname.wsgi:application
+    startCommand: gunicorn myproject.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: yourprojectname.settings
+        value: myproject.settings
+      - key: PYTHON_VERSION
+        value: 3.11.9
