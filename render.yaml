@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: your-service-name
+    runtime: python
+    pythonVersion: "3.11.9"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
