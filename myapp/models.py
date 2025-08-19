@@ -3,6 +3,12 @@ from django.core.exceptions import ValidationError
 import os
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.contrib.auth.models import User
+
+
+#--------------------------------------------------------------
+# ROOM MODEL HERE --------------------------------------------|
+#--------------------------------------------------------------
 
 class Room(models.Model):
     ROOM_STATUS_CHOICES = [
@@ -60,6 +66,11 @@ class Room(models.Model):
             icon_class = icon_map.get(key, 'fa-circle')
             result.append((icon_class, item.strip()))
         return result
+    
+    
+#---------------------------------------------------------------
+# ROOM IMAGE MODEL HERE ---------------------------------------|
+#---------------------------------------------------------------
 
 class RoomImage(models.Model):
     room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
@@ -67,7 +78,12 @@ class RoomImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.room.name}"
-
+    
+    
+#---------------------------------------------------------------
+# FOOD MENU MODEL HERE ----------------------------------------|
+#---------------------------------------------------------------
+ 
 class Menu(models.Model):
     FOOD_TYPE = [
         ('vegetarian', 'Vegetarian'),
@@ -82,6 +98,11 @@ class Menu(models.Model):
     thumbnail = models.ImageField(upload_to='food_thumnail/', null=True, blank=True)
     type = models.CharField(max_length=50, choices=FOOD_TYPE)
 
+
+#---------------------------------------------------------------
+# GALLERY MODEL HERE --------------------------------------------|
+#---------------------------------------------------------------
+
 class images(models.Model):
     IMAGE_CATEGORY = [
         ('rooms', 'Rooms'),
@@ -93,3 +114,34 @@ class images(models.Model):
     category = models.CharField(max_length=50, choices=IMAGE_CATEGORY)
     name = models.CharField(max_length=100)
     thumbnail = models.ImageField(upload_to='gallery_images/', null=True, blank=True)
+    
+#---------------------------------------------------------------
+# ODER-ITEAM MODEL HERE ---------------------------------------|
+#---------------------------------------------------------------
+
+class Order(models.Model):
+    ORDER_TYPES = (("food", "Food"), ("room", "Room"))
+    STATUS = (("PENDING","Pending"), ("PAID","Paid"), ("FAILED","Failed"))
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    order_type = models.CharField(max_length=10, choices=ORDER_TYPES)
+    item_name = models.CharField(max_length=200)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    # For food
+    quantity = models.PositiveIntegerField(default=1)
+
+    # For room booking
+    room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
+    check_in = models.DateField(null=True, blank=True)
+    check_out = models.DateField(null=True, blank=True)
+    guests = models.PositiveIntegerField(null=True, blank=True)
+
+    # Payments
+    status = models.CharField(max_length=10, choices=STATUS, default="PENDING")
+    gateway = models.CharField(max_length=20, blank=True)  # 'esewa' or 'khalti'
+    payment_reference = models.CharField(max_length=60, blank=True)  # e.g., refId / token
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.order_type} • {self.item_name} • {self.status}"

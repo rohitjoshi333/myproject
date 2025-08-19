@@ -56,21 +56,21 @@
                     <h1>Luxury Awaits You</h1>
                     {% endif %}
                     <p>Experience premium comfort and exceptional service at Hotel New Chetan</p>
-                    <a href="rooms.html" class="cta-button">Explore Rooms</a>
+                    <a href="{% url 'rooms'%}" class="cta-button">Explore Rooms</a>
                 </div>
             </div>
             <div class="slide" style="background-image: url('{% static 'imgs/Bar.jpg'%}');">
                 <div class="slide-content">
                     <h1>Fine Dining Experience</h1>
                     <p>Savor exquisite cuisine crafted by our talented chefs</p>
-                    <a href="restaurant.html" class="cta-button">View Restaurant</a>
+                    <a href="{% url 'restaurant'%}" class="cta-button">View Restaurant</a>
                 </div>
             </div>
             <div class="slide" style="background-image: url('{% static 'imgs/big_banquet.jpg'%}');">
                 <div class="slide-content">
                     <h1>Explore Local Attractions</h1>
                     <p>Discover beautiful destinations near our hotel</p>
-                    <a href="gallery.html#nearby" class="cta-button">Nearby Visits</a>
+                    <a href="{% url 'gallery'%}" class="cta-button">Nearby Visits</a>
                 </div>
             </div>
         </div>

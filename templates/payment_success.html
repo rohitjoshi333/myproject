@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2>Payment {{ order.status }}</h2>
+  <p>Order: {{ order.item_name }}</p>
+  <p>Amount: Rs. {{ order.amount }}</p>
+  {% if order.payment_reference %}
+    <p>Reference: {{ order.payment_reference }}</p>
+  {% endif %}
+  <p><a href="/">Go Home</a></p>
+{% endblock %}

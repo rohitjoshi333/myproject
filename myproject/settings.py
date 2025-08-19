@@ -12,16 +12,39 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_URL = config("BASE_URL", default="http://127.0.0.1:8000")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+ESEWA = {
+    "SCD": config("ESEWA_SCD", default="EPAYTEST"),
+    "ENV": config("ESEWA_ENV", default="UAT"),  # UAT or LIVE
+    "ESEWA_URL": "https://uat.esewa.com.np/epay/main",
+    "VERIFY_URL": "https://uat.esewa.com.np/epay/transrec",
+}
+if ESEWA["ENV"].upper() == "LIVE":
+    ESEWA["ESEWA_URL"] = "https://esewa.com.np/epay/main"
+    ESEWA["VERIFY_URL"] = "https://esewa.com.np/epay/transrec"
+
+KHALTI = {
+    "SECRET_KEY": config("KHALTI_SECRET_KEY"),
+    "VERIFY_URL": "https://khalti.com/api/v2/payment/verify/",
+    # For the JS widget you’ll load a script tag; no URL needed here
+}
+
+# Optional: if you’ll test from tunnels/domains
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = "django-insecure-ob1^dvz(rxjel2g9xs+ofv76!bcrl9w_*_uxxyc1domk(b%b^0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

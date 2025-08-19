@@ -51,21 +51,8 @@
     </section>
 
     <!-- Gallery Navigation -->
-    <section class="gallery-nav">
+    <section class="gallery-nav hotel-gallery active" id="hotel-gallery">
         <div class="container">
-            <div class="nav-buttons">
-                <button class="gallery-nav-btn active" data-section="hotel">Hotel Gallery</button>
-                <button class="gallery-nav-btn" data-section="nearby">Nearby Attractions</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hotel Gallery Section -->
-    <section class="gallery-section hotel-gallery active" id="hotel-gallery">
-        <div class="container">
-            <h2 class="section-title">Hotel Gallery</h2>
-            <p class="section-subtitle">Take a virtual tour of our beautiful hotel facilities</p>
-            
             <div class="gallery-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="rooms">Rooms</button>
@@ -74,7 +61,14 @@
                 <button class="filter-btn" data-filter="facilities">Facilities</button>
                 <button class="filter-btn" data-filter="events">Events</button>
             </div>
+        </div>
+    </section>
 
+    <!-- Hotel Gallery Section -->
+    <section class="gallery-section hotel-gallery active" id="hotel-gallery">
+        <div class="container">
+            <p class="section-subtitle">Explore our rooms, restaurant, lobby, facilities, and events through stunning images.</p>
+            
             <div class="gallery-grid" id="hotelGalleryGrid">
                 <!-- Rooms -->
                 {% for images in gallery %}
@@ -85,136 +79,6 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Nearby Attractions Section -->
-    <section class="gallery-section attractions-section" id="nearby-attractions">
-        <div class="container">
-            <h2 class="section-title">Nearby Attractions</h2>
-            <p class="section-subtitle">Explore the beautiful destinations around our hotel</p>
-            
-            <div class="attractions-slider-container">
-                <div class="attractions-slider">
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg" alt="Historical Temple">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Ancient Temple Complex</h3>
-                            <p class="distance">2.5 km from hotel</p>
-                            <p>A magnificent 12th-century temple complex showcasing traditional architecture and spiritual heritage. Perfect for cultural exploration and photography. The intricate carvings and peaceful atmosphere make it a must-visit destination for history enthusiasts.</p>
-                            <div class="attraction-features">
-                                <span>🏛️ Historical Site</span>
-                                <span>📸 Photography</span>
-                                <span>🚶 Walking Distance</span>
-                                <span>🎯 Cultural Heritage</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about visiting the Ancient Temple Complex near Hotel New Chetan. Can you provide directions and visiting hours?')">Get Directions</button>
-                        </div>
-                    </div>
-
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg" alt="City Park">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Central City Park</h3>
-                            <p class="distance">1.8 km from hotel</p>
-                            <p>A beautiful urban park with lush gardens, walking trails, and recreational facilities. Ideal for morning jogs, family picnics, and relaxation. Features include a lake, children's playground, and outdoor fitness equipment for all ages.</p>
-                            <div class="attraction-features">
-                                <span>🌳 Nature</span>
-                                <span>🏃 Jogging Track</span>
-                                <span>👨‍👩‍👧‍👦 Family Friendly</span>
-                                <span>🎮 Playground</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about visiting Central City Park near Hotel New Chetan. Can you provide directions and best visiting times?')">Get Directions</button>
-                        </div>
-                    </div>
-
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg" alt="Local Market">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Traditional Bazaar</h3>
-                            <p class="distance">3.2 km from hotel</p>
-                            <p>Vibrant local market offering traditional crafts, textiles, spices, and street food. Experience authentic local culture and shopping. The bazaar comes alive in the evenings with local musicians and food vendors creating a festive atmosphere.</p>
-                            <div class="attraction-features">
-                                <span>🛍️ Shopping</span>
-                                <span>🍜 Street Food</span>
-                                <span>🎨 Local Crafts</span>
-                                <span>🎵 Live Music</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about visiting the Traditional Bazaar near Hotel New Chetan. Can you provide directions and market hours?')">Get Directions</button>
-                        </div>
-                    </div>
-
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg" alt="Museum">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Heritage Museum</h3>
-                            <p class="distance">4.1 km from hotel</p>
-                            <p>Comprehensive museum showcasing regional history, art, and cultural artifacts. Educational and inspiring for visitors of all ages. Features interactive exhibits, guided tours, and a special collection of ancient manuscripts and artifacts.</p>
-                            <div class="attraction-features">
-                                <span>🏛️ Museum</span>
-                                <span>📚 Educational</span>
-                                <span>🎭 Cultural</span>
-                                <span>👨‍🏫 Guided Tours</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about visiting the Heritage Museum near Hotel New Chetan. Can you provide directions and entry details?')">Get Directions</button>
-                        </div>
-                    </div>
-
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg" alt="Scenic Viewpoint">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Sunset Viewpoint</h3>
-                            <p class="distance">6.5 km from hotel</p>
-                            <p>Breathtaking hilltop location offering panoramic city views and spectacular sunsets. Popular spot for photography and romantic evenings. The viewpoint features a small café and telescope for stargazing during clear nights.</p>
-                            <div class="attraction-features">
-                                <span>🌅 Sunset Views</span>
-                                <span>📸 Photography</span>
-                                <span>💑 Romantic</span>
-                                <span>🔭 Stargazing</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about visiting the Sunset Viewpoint near Hotel New Chetan. Can you provide directions and best viewing times?')">Get Directions</button>
-                        </div>
-                    </div>
-
-                    <div class="attraction-slide">
-                        <div class="attraction-image">
-                            <img src="https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg" alt="Adventure Sports">
-                        </div>
-                        <div class="attraction-content">
-                            <h3>Adventure Sports Center</h3>
-                            <p class="distance">8.2 km from hotel</p>
-                            <p>Exciting outdoor activities including rock climbing, zip-lining, and water sports. Perfect for adventure enthusiasts and thrill seekers. Professional instructors and safety equipment provided for all activities.</p>
-                            <div class="attraction-features">
-                                <span>🧗 Adventure</span>
-                                <span>🏄 Water Sports</span>
-                                <span>⚡ Thrilling</span>
-                                <span>👨‍🏫 Professional Guides</span>
-                            </div>
-                            <button class="attraction-btn" onclick="HotelApp.openWhatsAppChat('Hi! I would like information about the Adventure Sports Center near Hotel New Chetan. Can you provide details about activities and booking?')">Get Directions</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="attractions-indicators">
-                <span class="indicator active"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
-                <span class="indicator"></span>
             </div>
         </div>
     </section>

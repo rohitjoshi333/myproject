@@ -294,7 +294,7 @@ function formatDate(dateString) {
 
 // WhatsApp integration functions
 function openWhatsAppChat(message = '') {
-    const phoneNumber = '919876543210'; // Replace with actual number
+    const phoneNumber = '9767462649'; // Replace with actual number
     const defaultMessage = message || 'Hello! I\'m interested in Hotel New Chetan services.';
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
     window.open(url, '_blank');

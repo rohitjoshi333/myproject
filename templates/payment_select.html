@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2>Pay for {{ order.item_name }}</h2>
+<p>Total: <strong>Rs. {{ order.amount }}</strong></p>
+
+<!-- eSewa: go to a view that posts a form to eSewa -->
+<p>
+  <a href="{% url 'esewa_init' order.id %}" class="btn btn-success">Pay with eSewa</a>
+</p>
+
+<!-- Khalti: open JS Checkout → verify at backend -->
+<button id="khaltiPayBtn">Pay with Khalti</button>
+
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+<script>
+// amount must be in paisa
+var khaltiConfig = {
+  publicKey: "test_public_key", // use your public key for widget
+  productIdentity: "{{ order.id }}",
+  productName: "{{ order.item_name|escapejs }}",
+  eventHandler: {
+    onSuccess (payload) {
+      // payload.token, payload.amount
+      const form = new FormData();
+      form.append("token", payload.token);
+      form.append("amount", payload.amount); // already in paisa
+      form.append("order_id", "{{ order.id }}");
+
+      fetch("{% url 'khalti_verify' %}", {
+        method: "POST",
+        headers: {"X-CSRFToken": "{{ csrf_token }}"},
+        body: form
+      }).then(r => r.json())
+       .then(res => {
+          if (res.ok) window.location.href = res.redirect;
+          else window.location.href = res.redirect || "{% url 'payment_failure' order.id %}";
+       }).catch(() => {
+          window.location.href = "{% url 'payment_failure' order.id %}";
+       });
+    },
+    onError (error) { console.log(error); },
+    onClose () { /* user closed widget */ }
+  }
+};
+var checkout = new KhaltiCheckout(khaltiConfig);
+
+document.getElementById("khaltiPayBtn").onclick = function () {
+  checkout.show({ amount: {{ order.amount|floatformat:2 }} * 100 });
+};
+</script>
+
+{% endblock %}
