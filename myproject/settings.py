@@ -44,7 +44,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ob1^dvz(rxjel2g9xs+ofv76!bcrl9w_*_uxxyc1domk(b%b^0"
+SECRET_KEY = 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
